@@ -17,13 +17,13 @@ namespace AeroArchive.RegistrationDB
 
         public Task<List<Registration>> GetRegistrationDetsAsync()
         {
-            //Get all notes.
+            //Get all accounts.
             return database.Table<Registration>().ToListAsync();
         }
 
         public Task<Registration> GetRegistrationDetsAsync(int id)
         {
-            // Get a specific note.
+            // Get a specific user account.
             return database.Table<Registration>()
                             .Where(i => i.ID == id)
                             .FirstOrDefaultAsync();
@@ -33,19 +33,19 @@ namespace AeroArchive.RegistrationDB
         {
             if (registration.ID != 0)
             {
-                // Update an existing note.
+                // Update an existing account.
                 return database.UpdateAsync(registration);
             }
             else
             {
-                // Save a new note.
+                // Save a new user account.
                 return database.InsertAsync(registration);
             }
         }
 
         public Task<int> DeleteRegistrationDetsAsync(Registration registration)
         {
-            // Delete a note.
+            // Delete a user account.
             return database.DeleteAsync(registration);
         }
     }

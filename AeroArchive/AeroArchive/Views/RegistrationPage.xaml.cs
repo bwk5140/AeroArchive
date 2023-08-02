@@ -45,7 +45,7 @@ namespace AeroArchive.Views
             try
             {
                 int id = Convert.ToInt32(itemId);
-                // Retrieve the note and set it as the BindingContext of the page.
+                // Retrieve the account and set it as the BindingContext of the page.
                 Registration registration = await App.Database.GetRegistrationDetsAsync(id);
                 BindingContext = registration;
             }
