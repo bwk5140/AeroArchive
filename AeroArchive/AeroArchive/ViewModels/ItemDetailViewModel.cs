@@ -12,6 +12,7 @@ namespace AeroArchive.ViewModels
         private string itemId;
         private string text;
         private string description;
+        private string warrantyStatus;
         public string Id { get; set; }
 
         public string Text
@@ -24,6 +25,12 @@ namespace AeroArchive.ViewModels
         {
             get => description;
             set => SetProperty(ref description, value);
+        }
+
+        public string WarrantyStatus
+        {
+            get => warrantyStatus;
+            set => SetProperty(ref warrantyStatus, value);
         }
 
         public string ItemId
@@ -47,6 +54,7 @@ namespace AeroArchive.ViewModels
                 Id = item.Id;
                 Text = item.Text;
                 Description = item.Description;
+                WarrantyStatus = item.WarrantyStatus;
             }
             catch (Exception)
             {

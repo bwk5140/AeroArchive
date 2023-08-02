@@ -11,6 +11,7 @@ namespace AeroArchive.ViewModels
     {
         private string text;
         private string description;
+        private string warrantyStatus;
 
         public NewItemViewModel()
         {
@@ -23,7 +24,8 @@ namespace AeroArchive.ViewModels
         private bool ValidateSave()
         {
             return !String.IsNullOrWhiteSpace(text)
-                && !String.IsNullOrWhiteSpace(description);
+                && !String.IsNullOrWhiteSpace(description)
+                && !String.IsNullOrWhiteSpace(warrantyStatus);
         }
 
         public string Text
@@ -36,6 +38,12 @@ namespace AeroArchive.ViewModels
         {
             get => description;
             set => SetProperty(ref description, value);
+        }
+
+        public string WarrantyStatus
+        {
+            get => warrantyStatus;
+            set => SetProperty(ref warrantyStatus, value);
         }
 
         public Command SaveCommand { get; }
@@ -53,7 +61,8 @@ namespace AeroArchive.ViewModels
             {
                 Id = Guid.NewGuid().ToString(),
                 Text = Text,
-                Description = Description
+                Description = Description,
+                WarrantyStatus = WarrantyStatus
             };
 
             await DataStore.AddItemAsync(newItem);

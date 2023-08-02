@@ -5,8 +5,10 @@
              Title="{Binding Title}">
 
     <StackLayout Spacing="20" Padding="15">
-        <Label Text="Text:" FontSize="Medium" />
+        <Label Text="Product ID:" FontSize="Medium" />
         <Label Text="{Binding Text}" FontSize="Small"/>
+        <Label Text="Warranty Status:" FontSize="Medium" />
+        <Label Text="{Binding WarrantyStatus}" FontSize="Small"/>
         <Label Text="Description:" FontSize="Medium" />
         <Label Text="{Binding Description}" FontSize="Small"/>
     </StackLayout>
