@@ -92,7 +92,7 @@ namespace AeroArchive.Views
                 }
 
                 await Clipboard.SetTextAsync("1234");
-                await Navigation.PushAsync(new HomePage());
+                await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
             }
         }
 
@@ -185,7 +185,7 @@ namespace AeroArchive.Views
 
         private async void RegisterTapped(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync($"//{nameof(RegistrationPage)}");
+            await Navigation.PushAsync(new RegistrationPage());
         }
     }
 }

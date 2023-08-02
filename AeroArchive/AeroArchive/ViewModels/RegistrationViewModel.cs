@@ -1,6 +1,9 @@
-﻿using AeroArchive.Views;
+﻿/*
+using AeroArchive.Models;
+using AeroArchive.Views;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using Xamarin.Forms;
 
@@ -16,10 +19,10 @@ namespace AeroArchive.ViewModels
             RegistrationCommand = new Command(OnRegistrationClicked);
         }
 
-        private async void OnRegistrationClicked()
+        async void OnRegistrationClicked()
         {
             await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
         }
     }
-
 }
+*/

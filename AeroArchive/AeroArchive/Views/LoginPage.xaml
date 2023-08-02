@@ -23,7 +23,7 @@
                    x:Name="UserNameEntry"
                    IsSpellCheckEnabled="false"
                    MaxLength="7"
-                   Placeholder="Username"
+                   Placeholder="UserName"
                    HorizontalOptions="FillAndExpand"
                    Margin="20,5,20,10"
                    TextColor="#374955"
@@ -60,7 +60,6 @@
             <StackLayout>
                 <Label
             x:Name="LabelForgotPassword"
-            Grid.Row="2"
             Margin="10"
             HorizontalOptions="Center"
             Text="Forgot Password?"
@@ -71,14 +70,6 @@
                     </Label.GestureRecognizers>
                 </Label>
 
-                <Label
-            x:Name="LabelConnection"
-            Grid.Row="1"
-            Margin="10"
-            HorizontalOptions="Center"
-            IsVisible="False"
-            Opacity="0"
-            Text="Disconnected" />
             </StackLayout>
             <Label Padding="50" Text="Register" HorizontalOptions="Center"
                    TextColor="#00C0FF"
@@ -88,5 +79,13 @@
                 </Label.GestureRecognizers>
             </Label>
         </StackLayout>
+        <Label
+            x:Name="LabelConnection"
+            Margin="10"
+            HorizontalOptions="Center"
+            IsVisible="False"
+            Opacity="0"
+            Text="Disconnected" 
+            TextColor="#5D98B8"/>
     </AbsoluteLayout>
 </ContentPage>

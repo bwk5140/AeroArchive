@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:AeroArchive.ViewModels"
-             x:DataType="viewmodels:RegistrationViewModel"
              x:Class="AeroArchive.Views.RegistrationPage"
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False">
+
     <AbsoluteLayout>
         <StackLayout AbsoluteLayout.LayoutBounds="1, 0.5, 1,0.5"    
                      AbsoluteLayout.LayoutFlags="All"    
@@ -18,12 +17,14 @@
                 WidthRequest="400" HorizontalOptions="Center">
                 <Entry
                     Placeholder="First Name"
+                    Text="{Binding FirstName}"
                     HorizontalOptions="FillAndExpand"
                     Margin="20,5,20,10"
                     PlaceholderColor="#5D98B8"
                     BackgroundColor="#EFFBFF"/>
                 <Entry 
                     Placeholder="Last Name"
+                    Text="{Binding LastName}"
                     HorizontalOptions="FillAndExpand"
                     Margin="20,5,20,10"
                     PlaceholderColor="#5D98B8"
@@ -33,6 +34,7 @@
                 WidthRequest="400" HorizontalOptions="Center"
                 Orientation="Vertical">
                 <Entry Placeholder="Username"
+                       Text="{Binding UserName}"
                        HorizontalOptions="FillAndExpand"
                        Margin="20,5,20,10"
                        PlaceholderColor="#5D98B8"
@@ -40,6 +42,7 @@
 
                 </Entry>
                 <Entry Placeholder="Email"
+                       Text="{Binding Email}"
                        HorizontalOptions="FillAndExpand"
                        Margin="20,5,20,10"
                        PlaceholderColor="#5D98B8"
@@ -50,13 +53,15 @@
             <StackLayout 
                 WidthRequest="400" HorizontalOptions="Center">
                 <Entry IsPassword="True" Placeholder="Password"
+                       Text="{Binding Password}"
                        HorizontalOptions="FillAndExpand"
                        Margin="20,5,20,10"
                        PlaceholderColor="#5D98B8"
                        BackgroundColor="#EFFBFF"/>
             </StackLayout>
             <StackLayout>
-                <Button Text="Create new account" Command="{Binding RegistrationCommand}"
+                <Button Text="Create new account" 
+                        Clicked="OnRegistrationClicked"
                         Margin="20,5,20,10"
                         Button.BackgroundColor="#00C0FF"
                         Button.TextColor="#E6F4F1"/>
