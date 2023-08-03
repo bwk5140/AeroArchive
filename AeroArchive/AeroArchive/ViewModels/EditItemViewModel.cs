@@ -1,14 +1,14 @@
 ﻿using AeroArchive.Models;
-using AeroArchive.Views;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
+using System.Text;
 using Xamarin.Forms;
 
 namespace AeroArchive.ViewModels
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
-    public class ItemDetailViewModel : BaseViewModel
+    public class EditItemViewModel : BaseViewModel
     {
         private string itemId;
         private string text;
@@ -16,17 +16,12 @@ namespace AeroArchive.ViewModels
         private string warrantyStatus;
         private Item selectedItem;
         public int ID { get; set; }
-        public Command EditItemCommand { get; }
-        public Command DeleteItemCommand { get; }
+        public Command DoneEditingCommand { get; }
 
-        public ItemDetailViewModel()
+        public EditItemViewModel()
         {
-            EditItemCommand = new Command(OnEditItem);
-            DeleteItemCommand = new Command (OnDeleteItem);
-            this.PropertyChanged +=
-                (_, __) => EditItemCommand.ChangeCanExecute();
+            DoneEditingCommand = new Command(OnDoneEditingItem);
         }
-
         public string Text
         {
             get => text;
@@ -57,7 +52,6 @@ namespace AeroArchive.ViewModels
                 LoadItemId(value);
             }
         }
-        
 
         public async void LoadItemId(string itemId)
         {
@@ -75,23 +69,16 @@ namespace AeroArchive.ViewModels
                 Debug.WriteLine("Failed to Load Product");
             }
         }
-        public async void OnEditItem()
-        {
-            await Shell.Current.GoToAsync($"{nameof(EditItemPage)}?{nameof(EditItemViewModel.ItemId)}={selectedItem.ID}");
-        }
-
-        public async void OnDeleteItem()
+        public async void OnDoneEditingItem()
         {
             selectedItem = await App.Prod_Database.GetProductDetsAsync(Convert.ToInt32(itemId));
+            {
+                selectedItem.Text = Text;
+                selectedItem.Description = Description;
+                selectedItem.WarrantyStatus = WarrantyStatus;
+            };
 
-            try
-            {
-                await App.Prod_Database.DeleteProductDetsAsync(selectedItem);
-            }
-            catch (Exception)
-            {
-                Debug.WriteLine("Failed to Delete Product");
-            }
+            await App.Prod_Database.SaveProductDetsAsync(selectedItem);
             await Shell.Current.GoToAsync("..");
         }
     }

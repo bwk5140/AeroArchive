@@ -43,7 +43,6 @@ namespace AeroArchive
         {
             InitializeComponent();
 
-            //DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 

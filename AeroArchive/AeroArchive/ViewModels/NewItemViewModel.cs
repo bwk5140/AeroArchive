@@ -13,6 +13,7 @@ namespace AeroArchive.ViewModels
         private string text;
         private string description;
         private string warrantyStatus;
+        private Item selectedItem;
 
         public NewItemViewModel()
         {
@@ -59,6 +60,7 @@ namespace AeroArchive.ViewModels
 
         private async void OnSave()
         {
+            selectedItem = await App.Prod_Database.GetProductDetsAsync(Convert.ToInt32(itemID));
 
             Item newItem = new Item()
             {

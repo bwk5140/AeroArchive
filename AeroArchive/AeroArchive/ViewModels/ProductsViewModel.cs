@@ -88,8 +88,6 @@ namespace AeroArchive.ViewModels
                 return;
             
             await ExecuteLoadItemsCommand();
-
-
         }
 
         async void OnItemSelected(Item item)
