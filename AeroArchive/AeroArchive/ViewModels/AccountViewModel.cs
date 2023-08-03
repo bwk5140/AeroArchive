@@ -54,7 +54,7 @@ namespace AeroArchive.ViewModels
         private async void OnClearItem(object obj)
         {
             string response;
-            response = await Application.Current.MainPage.DisplayActionSheet("Warning! Clear product database?", "Cancel", "Clear", "Yes", "No");
+            response = await Application.Current.MainPage.DisplayActionSheet("Clear product database?", "Cancel", "Clear", "Yes", "No");
             if (response != null && (response == "Clear" || response == "Yes"))
             {
                 await App.EmployeeDatabase.ClearAccountsDBAsync();
