@@ -37,7 +37,7 @@ namespace AeroArchive.ViewModels
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                var items = await App.Prod_Database.GetProductDetsAsync();
                 foreach (var item in items)
                 {
                     Items.Add(item);
@@ -80,7 +80,7 @@ namespace AeroArchive.ViewModels
                 return;
 
             // This will push the ItemDetailPage onto the navigation stack
-            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.ID}");
         }
 
     }

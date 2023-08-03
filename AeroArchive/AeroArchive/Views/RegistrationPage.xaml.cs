@@ -1,6 +1,6 @@
 ﻿using AeroArchive.Models;
 using AeroArchive.ViewModels;
-using AeroArchive.RegistrationDB;
+using AeroArchive.AppDatabase;
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -37,7 +37,7 @@ namespace AeroArchive.Views
 
             // Retrieve account details from the database, and set them as the
             // data source for the CollectionView.
-            await App.Database.GetRegistrationDetsAsync();
+            await App.EmployeeDatabase.GetRegistrationDetsAsync();
         }
 
         async void LoadRegistration(string itemId)
@@ -46,12 +46,12 @@ namespace AeroArchive.Views
             {
                 int id = Convert.ToInt32(itemId);
                 // Retrieve the account and set it as the BindingContext of the page.
-                Registration registration = await App.Database.GetRegistrationDetsAsync(id);
+                Registration registration = await App.EmployeeDatabase.GetRegistrationDetsAsync(id);
                 BindingContext = registration;
             }
             catch (Exception)
             {
-                Console.WriteLine("Failed to load note.");
+                Console.WriteLine("Failed to load account.");
             }
         }
 
@@ -63,7 +63,7 @@ namespace AeroArchive.Views
             if (!string.IsNullOrWhiteSpace(registration.Email))
             {
                 // Save user details.
-                await App.Database.SaveRegistrationDetsAsync(registration);
+                await App.EmployeeDatabase.SaveRegistrationDetsAsync(registration);
             }
             // Navigate backwards
             await Shell.Current.GoToAsync("..");

@@ -9,6 +9,7 @@ namespace AeroArchive.ViewModels
 {
     public class NewItemViewModel : BaseViewModel
     {
+        public string itemID;
         private string text;
         private string description;
         private string warrantyStatus;
@@ -27,6 +28,7 @@ namespace AeroArchive.ViewModels
                 && !String.IsNullOrWhiteSpace(description)
                 && !String.IsNullOrWhiteSpace(warrantyStatus);
         }
+
 
         public string Text
         {
@@ -57,15 +59,15 @@ namespace AeroArchive.ViewModels
 
         private async void OnSave()
         {
+
             Item newItem = new Item()
             {
-                Id = Guid.NewGuid().ToString(),
                 Text = Text,
                 Description = Description,
                 WarrantyStatus = WarrantyStatus
             };
 
-            await DataStore.AddItemAsync(newItem);
+            await App.Prod_Database.SaveProductDetsAsync(newItem);
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");

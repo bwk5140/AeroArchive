@@ -13,7 +13,16 @@ namespace AeroArchive.ViewModels
         private string text;
         private string description;
         private string warrantyStatus;
-        public string Id { get; set; }
+        private Item selectedItem;
+        public int ID { get; set; }
+        public Command DeleteItemCommand { get; }
+
+        public ItemDetailViewModel()
+        {
+            DeleteItemCommand = new Command (OnDeleteItem);
+            this.PropertyChanged +=
+                (_, __) => DeleteItemCommand.ChangeCanExecute();
+        }
 
         public string Text
         {
@@ -45,21 +54,37 @@ namespace AeroArchive.ViewModels
                 LoadItemId(value);
             }
         }
+        
 
         public async void LoadItemId(string itemId)
         {
             try
             {
-                var item = await DataStore.GetItemAsync(itemId);
-                Id = item.Id;
+                ID = Convert.ToInt32(itemId);
+                var item = await App.Prod_Database.GetProductDetsAsync(ID);
                 Text = item.Text;
                 Description = item.Description;
                 WarrantyStatus = item.WarrantyStatus;
             }
             catch (Exception)
             {
-                Debug.WriteLine("Failed to Load Item");
+                Debug.WriteLine("Failed to Load Product");
             }
+        }
+
+        public async void OnDeleteItem()
+        {
+            selectedItem = await App.Prod_Database.GetProductDetsAsync(Convert.ToInt32(itemId));
+
+            try
+            {
+                await App.Prod_Database.DeleteProductDetsAsync(selectedItem);
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("Failed to Delete Product");
+            }
+            await Shell.Current.GoToAsync("..");
         }
     }
 }

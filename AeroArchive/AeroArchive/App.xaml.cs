@@ -1,5 +1,5 @@
 ﻿using AeroArchive;
-using AeroArchive.RegistrationDB;
+using AeroArchive.AppDatabase;
 using AeroArchive.Services;
 using AeroArchive.Views;
 using System;
@@ -11,17 +11,31 @@ namespace AeroArchive
 {
     public partial class App : Application
     {
-        static RegistrationDatabase database;
+        static RegistrationDatabase AccountDatabase;
 
-        public static RegistrationDatabase Database
+        public static RegistrationDatabase EmployeeDatabase
         {
             get
             {
-                if (database == null)
+                if (AccountDatabase == null)
                 {
-                    database = new RegistrationDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Registration.db3"));
+                    AccountDatabase = new RegistrationDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Registration.db3"));
                 }
-                return database;
+                return AccountDatabase;
+            }
+        }
+
+        static ProductDatabase ProdDatabase;
+
+        public static ProductDatabase Prod_Database
+        {
+            get
+            {
+                if (ProdDatabase == null)
+                {
+                    ProdDatabase = new ProductDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Registration.db2"));
+                }
+                return ProdDatabase;
             }
         }
 
@@ -29,7 +43,7 @@ namespace AeroArchive
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            //DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using SQLite;
 using AeroArchive.Models;
 
-namespace AeroArchive.RegistrationDB
+namespace AeroArchive.AppDatabase
 {
     public class RegistrationDatabase
     {

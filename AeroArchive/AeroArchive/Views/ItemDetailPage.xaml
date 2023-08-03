@@ -4,6 +4,10 @@
              x:Class="AeroArchive.Views.ItemDetailPage"
              Title="{Binding Title}">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete" Command="{Binding DeleteItemCommand}" />
+    </ContentPage.ToolbarItems>
+
     <StackLayout Spacing="20" Padding="15">
         <Label Text="Product ID:" FontSize="Medium" />
         <Label Text="{Binding Text}" FontSize="Small"/>
