@@ -28,7 +28,7 @@ namespace AeroArchive.ViewModels
                 && !String.IsNullOrWhiteSpace(role)
                 && !String.IsNullOrWhiteSpace(email);
         }
-        public string Fullname
+        public string FullName
         {
             get => fullName;
             set => SetProperty(ref fullName, value);
@@ -66,7 +66,7 @@ namespace AeroArchive.ViewModels
 
             Employee newEmployee = new Employee()
             {
-                FullName = Fullname,
+                FullName = FullName,
                 EmployeeID = EmployeeID,
                 Role = Role, 
                 Email = Email
