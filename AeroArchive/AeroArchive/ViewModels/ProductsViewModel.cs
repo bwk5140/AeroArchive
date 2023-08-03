@@ -1,6 +1,4 @@
 ﻿using AeroArchive.Models;
-using AeroArchive.Services;
-using AeroArchive.ViewModels;
 using AeroArchive.Views;
 using System;
 using System.Collections.ObjectModel;
@@ -31,6 +29,16 @@ namespace AeroArchive.ViewModels
             AddItemCommand = new Command(OnAddItem);
 
             ClearItemCommand = new Command(OnClearItem);
+        }
+
+        public async Task<Registration> GetCurrentUser()
+        {
+            if (Application.Current.Properties.ContainsKey("LoggedInUserId"))
+            {
+                int userId = (int)Application.Current.Properties["LoggedInUserId"];
+                return await App.EmployeeDatabase.GetRegistrationDetsAsync(userId);
+            }
+            return null;
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -76,6 +84,7 @@ namespace AeroArchive.ViewModels
         {
             await Shell.Current.GoToAsync(nameof(NewItemPage));
         }
+
         private async void OnClearItem(object obj)
         {
             string response;

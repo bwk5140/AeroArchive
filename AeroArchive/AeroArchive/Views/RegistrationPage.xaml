@@ -60,6 +60,10 @@
                        BackgroundColor="#EFFBFF"/>
             </StackLayout>
             <StackLayout>
+                <StackLayout Orientation="Horizontal" Padding="20,5,20,10">
+                    <CheckBox x:Name="isAdminCheckbox" IsChecked="{Binding IsAdmin}" VerticalOptions="Center"/>
+                    <Label Text="Check if you are an admin" VerticalOptions="Center"/>
+                </StackLayout>
                 <Button Text="Create new account" 
                         Clicked="OnRegistrationClicked"
                         Margin="20,5,20,10"

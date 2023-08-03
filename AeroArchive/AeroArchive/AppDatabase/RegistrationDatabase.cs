@@ -29,6 +29,13 @@ namespace AeroArchive.AppDatabase
                             .FirstOrDefaultAsync();
         }
 
+        public Task<Registration> GetUserByUsernameAndPassword(string username, string password)
+        {
+            return database.Table<Registration>()
+                           .Where(user => user.UserName == username && user.Password == password)
+                           .FirstOrDefaultAsync();
+        }
+
         public Task<int> SaveRegistrationDetsAsync(Registration registration)
         {
             if (registration.ID != 0)

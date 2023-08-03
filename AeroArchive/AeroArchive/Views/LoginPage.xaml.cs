@@ -61,7 +61,6 @@ namespace AeroArchive.Views
                 VisualStateManager.GoToState(UserNameEntry, "Invalid");
                 isValid = false;
             }
-
             else
             {
                 VisualStateManager.GoToState(UserNameEntry, "Valid");
@@ -81,9 +80,24 @@ namespace AeroArchive.Views
 
             if (isValid)
             {
-
                 try
                 {
+                    // Fetch the user's information from the database
+                    var user = await App.EmployeeDatabase.GetUserByUsernameAndPassword(UserNameEntry.Text, PasswordEntry.Text);
+
+                    if (user != null)
+                    {
+                        // Save the user's ID into Application.Current.Properties
+                        Application.Current.Properties["LoggedInUserId"] = user.ID;
+                        await Application.Current.SavePropertiesAsync();
+                    }
+                    else
+                    {
+                        // The user's credentials are not valid, display an error message and return
+                        await DisplayAlert("Invalid credentials", "", "OK");
+                        return;
+                    }
+
                     await SecureStorage.SetAsync("token", PasswordEntry.Text);
                 }
                 catch (Exception ex)
@@ -94,6 +108,7 @@ namespace AeroArchive.Views
                 await Clipboard.SetTextAsync("1234");
                 await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
             }
+
         }
 
         protected override async void OnAppearing()
