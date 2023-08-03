@@ -1,6 +1,4 @@
 ﻿using AeroArchive.Models;
-using AeroArchive.Services;
-using AeroArchive.ViewModels;
 using AeroArchive.Views;
 using System;
 using System.Collections.ObjectModel;

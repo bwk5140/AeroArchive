@@ -1,11 +1,7 @@
-﻿using AeroArchive;
-using AeroArchive.AppDatabase;
-using AeroArchive.Services;
-using AeroArchive.Views;
+﻿using AeroArchive.AppDatabase;
 using System;
 using System.IO;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace AeroArchive
 {

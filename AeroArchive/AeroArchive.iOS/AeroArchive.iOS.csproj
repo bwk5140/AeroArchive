@@ -145,4 +145,10 @@
   <ItemGroup>
     <BundleResource Include="imagikCorpLogo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="account.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="home.png" />
+  </ItemGroup>
 </Project>

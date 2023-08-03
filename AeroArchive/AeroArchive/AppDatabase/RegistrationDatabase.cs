@@ -48,5 +48,11 @@ namespace AeroArchive.AppDatabase
             // Delete a user account.
             return database.DeleteAsync(registration);
         }
+
+        public Task<int> ClearAccountsDBAsync()
+        {
+            // Delete a product.
+            return database.DeleteAllAsync<Registration>();
+        }
     }
 }

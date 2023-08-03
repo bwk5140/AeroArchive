@@ -1,14 +1,8 @@
 ﻿using AeroArchive.Models;
-using AeroArchive.ViewModels;
-using AeroArchive.AppDatabase;
 using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Diagnostics;
 
 namespace AeroArchive.Views
 {
@@ -60,14 +54,50 @@ namespace AeroArchive.Views
             var registration = (Registration)BindingContext;
             registration.Date = DateTime.UtcNow;
 
+            var isValid = true;
             if (!string.IsNullOrWhiteSpace(registration.Email))
             {
-                // Save user details.
-                await App.EmployeeDatabase.SaveRegistrationDetsAsync(registration);
-            }
-            // Navigate backwards
-            await Shell.Current.GoToAsync("..");
+                var items = await App.EmployeeDatabase.GetRegistrationDetsAsync();
+                foreach (var item in items)
+                {
+                    if (item.UserName == registration.UserName)
+                    {
+                        await DisplayAlert("Username is already taken", "", "Ok");
+                        VisualStateManager.GoToState(UserNameEntry, "Invalid");
+                        isValid = false;
+                    }
+                    else
+                    {
+                        VisualStateManager.GoToState(UserNameEntry, "Valid");
+                    }
 
+                    if (item.Email == registration.Email)
+                    {
+                        await DisplayAlert("Email is already registered", "", "Ok");
+                        VisualStateManager.GoToState(EmailEntry, "Invalid");
+                        isValid = false;
+                    }
+                    else
+                    {
+                        VisualStateManager.GoToState(EmailEntry, "Valid");
+                    }
+                }
+            }
+            if (isValid)
+            {
+                try
+                {
+                    // Save user details.
+                    await App.EmployeeDatabase.SaveRegistrationDetsAsync(registration);
+
+                    // Navigate backwards
+                    await Shell.Current.GoToAsync("..");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                }
+            }
         }
     }
 

@@ -1,7 +1,5 @@
-﻿using AeroArchive.Views;
-using AeroArchive.Models;
+﻿using AeroArchive.Models;
 using System;
-using System.Runtime.InteropServices;
 using Utils;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -90,11 +88,23 @@ namespace AeroArchive.Views
                 {
                     throw new Exception(ex.ToString());
                 }
-
-                await Clipboard.SetTextAsync("1234");
-                await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+                //await Clipboard.SetTextAsync("1234");
+                //if (ValidateUser(UserNameEntry.Text, PasswordEntry.Text))
+                    await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+                //else
+                    //await DisplayAlert("Invalid username or password", "", "OK");
             }
         }
+        /*
+        public bool ValidateUser(string username, string password)
+        {
+            var list = App.EmployeeDatabase.GetRegistrationDetsAsync();
+            if(list.Equals(username) && list.Equals(password))
+                return true;
+            else 
+                return false;
+        }
+        */
 
         protected override async void OnAppearing()
         {

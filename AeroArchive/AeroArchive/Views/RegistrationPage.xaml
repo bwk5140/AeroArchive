@@ -12,6 +12,7 @@
                      VerticalOptions="Center"
                      BackgroundColor="#EFFBFF"
                      Padding="50">
+            
             <StackLayout
                 Orientation="Horizontal"
                 WidthRequest="400" HorizontalOptions="Center">
@@ -33,21 +34,21 @@
             <StackLayout
                 WidthRequest="400" HorizontalOptions="Center"
                 Orientation="Vertical">
-                <Entry Placeholder="Username"
+                <Entry x:Name="UserNameEntry"
+                       Placeholder="Username"
                        Text="{Binding UserName}"
                        HorizontalOptions="FillAndExpand"
                        Margin="20,5,20,10"
                        PlaceholderColor="#5D98B8"
                        BackgroundColor="#EFFBFF">
-
                 </Entry>
-                <Entry Placeholder="Email"
+                <Entry x:Name="EmailEntry"
+                       Placeholder="Email"
                        Text="{Binding Email}"
                        HorizontalOptions="FillAndExpand"
                        Margin="20,5,20,10"
                        PlaceholderColor="#5D98B8"
                        BackgroundColor="#EFFBFF">
-
                 </Entry>
             </StackLayout>
             <StackLayout 

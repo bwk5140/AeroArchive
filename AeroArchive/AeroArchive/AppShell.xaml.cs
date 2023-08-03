@@ -1,7 +1,5 @@
 ﻿using AeroArchive.Views;
-using AeroArchive.ViewModels;
 using System;
-using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace AeroArchive

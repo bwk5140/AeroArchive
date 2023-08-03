@@ -1,10 +1,6 @@
 ﻿using AeroArchive.Models;
 using AeroArchive.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace AeroArchive.Views
 {
