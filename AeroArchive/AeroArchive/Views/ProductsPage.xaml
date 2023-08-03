@@ -9,6 +9,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
+        <ToolbarItem Text="Clear" Command="{Binding ClearItemCommand}" />
     </ContentPage.ToolbarItems>
 
     <!--

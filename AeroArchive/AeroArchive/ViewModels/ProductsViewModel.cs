@@ -17,6 +17,7 @@ namespace AeroArchive.ViewModels
         public ObservableCollection<Item> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
+        public Command ClearItemCommand { get; }
         public Command<Item> ItemTapped { get; }
 
         public ProductsViewModel()
@@ -28,6 +29,8 @@ namespace AeroArchive.ViewModels
             ItemTapped = new Command<Item>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
+
+            ClearItemCommand = new Command(OnClearItem);
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -72,6 +75,21 @@ namespace AeroArchive.ViewModels
         private async void OnAddItem(object obj)
         {
             await Shell.Current.GoToAsync(nameof(NewItemPage));
+        }
+        private async void OnClearItem(object obj)
+        {
+            string response;
+            response = await Application.Current.MainPage.DisplayActionSheet("Warning! Clear product database?", "Cancel" , "Clear", "Yes", "No");
+            if (response != null && (response == "Clear" || response == "Yes"))
+            {
+                await App.Prod_Database.ClearProductDBAsync();
+            }
+            else if (response != null && (response == "Cancel" || response == "No"))
+                return;
+            
+            await ExecuteLoadItemsCommand();
+
+
         }
 
         async void OnItemSelected(Item item)

@@ -48,5 +48,11 @@ namespace AeroArchive.AppDatabase
             // Delete a product.
             return database.DeleteAsync(item);
         }
+
+        public Task<int> ClearProductDBAsync()
+        {
+            // Delete a product.
+            return database.DeleteAllAsync<Item>();
+        }
     }
 }
