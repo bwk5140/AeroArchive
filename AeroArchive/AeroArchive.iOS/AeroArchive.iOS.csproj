@@ -143,6 +143,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="imagik-corp-logo.png" />
+    <BundleResource Include="imagikCorpLogo.png" />
   </ItemGroup>
 </Project>
