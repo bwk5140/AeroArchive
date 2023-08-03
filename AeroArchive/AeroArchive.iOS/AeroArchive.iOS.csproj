@@ -151,4 +151,7 @@
   <ItemGroup>
     <BundleResource Include="home.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="employees.png" />
+  </ItemGroup>
 </Project>

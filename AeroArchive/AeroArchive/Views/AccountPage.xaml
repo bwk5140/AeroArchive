@@ -20,14 +20,14 @@
                         <Label Text="{Binding FirstName}" 
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 
-                            FontSize="13" />
+                            FontSize="15" />
                         <Label Text="{Binding LastName}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
                         <Label Text="{Binding UserName}" 
                             LineBreakMode="NoWrap" 
-                            Style="{DynamicResource ListItemTextStyle}" 
+                            Style="{DynamicResource ListItemDetailTextStyle}" 
                             FontSize="13" />
                         <Label Text="{Binding Email}" 
                             LineBreakMode="NoWrap"
@@ -35,7 +35,7 @@
                             FontSize="13" />
                         <Label Text="{Binding Password}" 
                             LineBreakMode="NoWrap" 
-                            Style="{DynamicResource ListItemTextStyle}" 
+                            Style="{DynamicResource ListItemDetailTextStyle}" 
                             FontSize="13" />
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer 

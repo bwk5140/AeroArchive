@@ -92,6 +92,9 @@
     <FlyoutItem Title="Account" Icon="account.png">
         <ShellContent Route="AccountPage" ContentTemplate="{DataTemplate local:AccountPage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Employees" Icon="employees.png">
+        <ShellContent Route="EmployeesPage" ContentTemplate="{DataTemplate local:EmployeesPage}" />
+    </FlyoutItem>
     <FlyoutItem Title="Products" Icon="icon_feed.png">
         <ShellContent Route="ProductsPage" ContentTemplate="{DataTemplate local:ProductsPage}" />
     </FlyoutItem>

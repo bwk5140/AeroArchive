@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="account.png" />
+    <Content Include="employees.png" />
     <Content Include="home.png" />
     <Content Include="imagikCorpLogo.png" />
     <Content Include="Properties\Default.rd.xml" />

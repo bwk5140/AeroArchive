@@ -28,7 +28,7 @@ namespace AeroArchive.ViewModels
             try
             {
                 Accounts.Clear();
-                var items = await App.EmployeeDatabase.GetRegistrationDetsAsync();
+                var items = await App.Account_Database.GetRegistrationDetsAsync();
                 foreach (var item in items)
                 {
                     Accounts.Add(item);
@@ -58,7 +58,7 @@ namespace AeroArchive.ViewModels
             
             if (response != null && (response == "Clear" || response == "Yes"))
             {
-                await App.EmployeeDatabase.ClearAccountsDBAsync();
+                await App.Account_Database.ClearAccountsDBAsync();
             }
             else if (response != null && (response == "Cancel" || response == "No"))
                 return;

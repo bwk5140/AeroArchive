@@ -31,7 +31,7 @@ namespace AeroArchive.Views
 
             // Retrieve account details from the database, and set them as the
             // data source for the CollectionView.
-            await App.EmployeeDatabase.GetRegistrationDetsAsync();
+            await App.Account_Database.GetRegistrationDetsAsync();
         }
 
         async void LoadRegistration(string itemId)
@@ -40,7 +40,7 @@ namespace AeroArchive.Views
             {
                 int id = Convert.ToInt32(itemId);
                 // Retrieve the account and set it as the BindingContext of the page.
-                Registration registration = await App.EmployeeDatabase.GetRegistrationDetsAsync(id);
+                Registration registration = await App.Account_Database.GetRegistrationDetsAsync(id);
                 BindingContext = registration;
             }
             catch (Exception)
@@ -57,7 +57,7 @@ namespace AeroArchive.Views
             var isValid = true;
             if (!string.IsNullOrWhiteSpace(registration.Email))
             {
-                var items = await App.EmployeeDatabase.GetRegistrationDetsAsync();
+                var items = await App.Account_Database.GetRegistrationDetsAsync();
                 foreach (var item in items)
                 {
                     if (item.UserName == registration.UserName)
@@ -88,7 +88,7 @@ namespace AeroArchive.Views
                 try
                 {
                     // Save user details.
-                    await App.EmployeeDatabase.SaveRegistrationDetsAsync(registration);
+                    await App.Account_Database.SaveRegistrationDetsAsync(registration);
 
                     // Navigate backwards
                     await Shell.Current.GoToAsync("..");

@@ -12,6 +12,9 @@ namespace AeroArchive
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
             Routing.RegisterRoute(nameof(EditItemPage), typeof(EditItemPage));
+            Routing.RegisterRoute(nameof(EmployeeDetailPage), typeof(EmployeeDetailPage));
+            Routing.RegisterRoute(nameof(NewEmployeePage), typeof(NewEmployeePage));
+            Routing.RegisterRoute(nameof(EditEmployeePage), typeof(EditEmployeePage));
             Routing.RegisterRoute(nameof(RegistrationPage), typeof(RegistrationPage));
         }
 

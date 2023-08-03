@@ -9,7 +9,7 @@ namespace AeroArchive
     {
         static RegistrationDatabase AccountDatabase;
 
-        public static RegistrationDatabase EmployeeDatabase
+        public static RegistrationDatabase Account_Database
         {
             get
             {
@@ -29,9 +29,23 @@ namespace AeroArchive
             {
                 if (ProdDatabase == null)
                 {
-                    ProdDatabase = new ProductDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Registration.db2"));
+                    ProdDatabase = new ProductDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Products.db2"));
                 }
                 return ProdDatabase;
+            }
+        }
+
+        static EmployeeDatabase EmployeeDatabase;
+
+        public static EmployeeDatabase Employee_Database
+        {
+            get
+            {
+                if (EmployeeDatabase == null)
+                {
+                    EmployeeDatabase = new EmployeeDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Employees.db1"));
+                }
+                return EmployeeDatabase;
             }
         }
 

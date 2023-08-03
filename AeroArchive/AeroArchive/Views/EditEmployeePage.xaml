@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AeroArchive.Views.EditEmployeePage"
+             Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Done" Command="{Binding DoneEditingCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Spacing="20" Padding="15">
+        <Label Text="Employee's Full Name" FontSize="Medium" />
+        <Entry Text="{Binding Fullname, Mode=TwoWay}" FontSize="Medium" />
+        <Label Text="Employee ID" FontSize="Medium" />
+        <Entry Text="{Binding EmployeeiD, Mode=TwoWay}" FontSize="Medium" />
+        <Label Text="Role" FontSize="Medium" />
+        <Entry Text="{Binding Role, Mode=TwoWay}" FontSize="Medium" />
+        <Label Text="Email" FontSize="Medium" />
+        <Entry Text="{Binding Email, Mode=TwoWay}" FontSize="Medium" Margin="0" />
+    </StackLayout>
+
+</ContentPage>
