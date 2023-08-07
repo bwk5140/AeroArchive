@@ -55,7 +55,11 @@ namespace AeroArchive.Views
             registration.Date = DateTime.UtcNow;
 
             var isValid = true;
-            if (!string.IsNullOrWhiteSpace(registration.Email))
+            if (!string.IsNullOrWhiteSpace(registration.FirstName)
+                && !string.IsNullOrWhiteSpace(registration.LastName)
+                && !string.IsNullOrWhiteSpace(registration.UserName)
+                && !string.IsNullOrWhiteSpace(registration.Email)
+                && !string.IsNullOrWhiteSpace(registration.Password))
             {
                 var items = await App.Account_Database.GetRegistrationDetsAsync();
                 foreach (var item in items)
