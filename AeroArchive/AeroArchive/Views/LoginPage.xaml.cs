@@ -10,7 +10,6 @@ namespace AeroArchive.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
-        bool isValid = true;
         public LoginPage()
         {
             InitializeComponent();
@@ -47,6 +46,8 @@ namespace AeroArchive.Views
 
         async void OnLoginClicked(object obj, EventArgs e)
         {
+            var isValid = true;
+
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 await DisplayAlert("No Internet", "", "OK");
@@ -84,25 +85,30 @@ namespace AeroArchive.Views
 
             else
             {
-                foreach (var item in list)
+                if (isValid)
                 {
-                    if (UserNameEntry.Text.Equals(item.UserName) && PasswordEntry.Text.Equals(item.Password))
+                    foreach (var item in list)
                     {
-                        isValid = true;
-                        break;
-                    }
-                    if (!UserNameEntry.Text.Equals(item.UserName))
-                    {
-                        isValid = false;
-                    }
-                    if (!PasswordEntry.Text.Equals(item.Password))
-                    {
-                        isValid = false;
+                        if (UserNameEntry.Text.Equals(item.UserName) && PasswordEntry.Text.Equals(item.Password))
+                        {
+                            isValid = true;
+                            break;
+                        }
+                        if (!UserNameEntry.Text.Equals(item.UserName))
+                        {
+                            isValid = false;
+                        }
+                        if (!PasswordEntry.Text.Equals(item.Password))
+                        {
+                            isValid = false;
+                        }
                     }
                 }
             }
 
-            if (!isValid && list.Count > 0) 
+            if (!isValid && list.Count > 0 && (!string.IsNullOrEmpty(UserNameEntry.Text)
+                && UserNameEntry.Text.Length > 5) && (!string.IsNullOrEmpty(PasswordEntry.Text)
+                && PasswordEntry.Text.Length > 5))
             { 
                 await DisplayAlert("Invalid username or password", "", "OK"); 
             }

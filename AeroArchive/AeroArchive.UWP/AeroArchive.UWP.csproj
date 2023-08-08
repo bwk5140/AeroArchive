@@ -109,6 +109,7 @@
     <Content Include="employees.png" />
     <Content Include="home.png" />
     <Content Include="imagikCorpLogo.png" />
+    <Content Include="imagikLogo.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
