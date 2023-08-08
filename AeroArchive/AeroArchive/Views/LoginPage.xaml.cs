@@ -107,8 +107,8 @@ namespace AeroArchive.Views
             }
 
             if (!isValid && list.Count > 0 && (!string.IsNullOrEmpty(UserNameEntry.Text)
-                && UserNameEntry.Text.Length > 5) && (!string.IsNullOrEmpty(PasswordEntry.Text)
-                && PasswordEntry.Text.Length > 5))
+                && UserNameEntry.Text.Length >= 5) && (!string.IsNullOrEmpty(PasswordEntry.Text)
+                && PasswordEntry.Text.Length >= 5))
             { 
                 await DisplayAlert("Invalid username or password", "", "OK"); 
             }
