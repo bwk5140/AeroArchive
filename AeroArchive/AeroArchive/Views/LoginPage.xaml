@@ -1,91 +1,100 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             mc:Ignorable="d"
              x:Class="AeroArchive.Views.LoginPage"
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False">
 
-    <AbsoluteLayout>
-        <StackLayout AbsoluteLayout.LayoutBounds="1, 0.2, 1,1"   
-                     AbsoluteLayout.LayoutFlags="All"    
-                     WidthRequest="400" HorizontalOptions="Center"    
-                     VerticalOptions="Center"
-                     BackgroundColor="#EFFBFF"
-                     Padding="50">
-            <Label Text="Username:"
-                   TextColor="#5D98B8"
-                   Margin="20,5,20,10"/>
-            <Entry 
-                   x:Name="UserNameEntry"
-                   IsSpellCheckEnabled="false"
-                   MaxLength="7"
-                   Placeholder="UserName"
-                   HorizontalOptions="FillAndExpand"
-                   Margin="20,5,20,10"
-                   TextColor="#374955"
-                   BackgroundColor="#EFFBFF"/>
-            <Label Text="Password:"
-                   TextColor="#5D98B8"
-                   Margin="20,5,20,10"/>
-            <Entry 
-                   x:Name="PasswordEntry"
-                   IsPassword="True" Placeholder="Password"
-                   HorizontalOptions="FillAndExpand"
-                   TextColor="#374955"
-                   TextChanged="Handle_TextChanged"
-                   Margin="20,5,20,10"
-                   BackgroundColor="#EFFBFF"/>
-            <Label
-                   x:Name="StrengthIndicator"
-                   FontSize="24"
-                   HorizontalOptions="Center"
-                   HorizontalTextAlignment="Center"
-                   StyleClass="strength"
-                   Text="" />
-            <Button Clicked="OnLoginClicked" Text="Login"
-                    Margin="20,5,20,10"
-                    Button.BackgroundColor="#00C0FF"
-                    Button.TextColor="#E6F4F1"/>
-            <StackLayout
+    <ContentPage.Resources>
+        <ResourceDictionary Source="../Resources/Fonts/FontRD.xaml" />
+        <ResourceDictionary Source="../Resources/Fonts/EntryValidationRD.xaml" />
+        <StyleSheet Source="../Styles/LoginPage.css" />
+    </ContentPage.Resources>
+
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <FlexLayout x:Name="Form" StyleClass="body">
+            <StackLayout x:Name="LoginForm" StyleClass="container">
+                <Label StyleClass="logo" Text="Sign in" TextColor="DarkSlateGray" />
+                <FlexLayout StyleClass="login-form">
+                    <Entry
+                        x:Name="UserNameEntry"
+                        IsSpellCheckEnabled="false"
+                        MaxLength="7"
+                        Placeholder="UserName"
+                        PlaceholderColor="DarkSlateGray"
+                        Text="{Binding UserName}"
+                        TextColor="DarkSlateGray" 
+                        TextChanged="Handle_TextChanged"/>
+                    <Entry
+                        x:Name="PasswordEntry"
+                        IsPassword="true"
+                        Placeholder="Password"
+                        PlaceholderColor="DarkSlateGray"
+                        TextChanged="Handle_TextChanged"
+                        TextColor="DarkSlateGray" />
+
+                    <Label
+                        x:Name="StrengthIndicator"
+                        FontSize="24"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource FAStyle}"
+                        StyleClass="strength"
+                        Text="" />
+
+                    <Button Clicked="OnLoginClicked" Text="Login" 
+                            TextColor="WhiteSmoke"/>
+                </FlexLayout>
+                
+                <StackLayout
                         Margin="50,10"
                         IsVisible="True"
                         Orientation="Horizontal">
-                <Label Text="Remember Me: " />
-                <Switch IsToggled="{Binding RememberMe}" />
-            </StackLayout>
-            <StackLayout>
+                    <Label Text="Remember Me:"
+                               TextColor="DarkSlateGray"/>
+                    <Switch IsToggled="{Binding RememberMe}" />
+                </StackLayout>
+
                 <Label
-            x:Name="LabelForgotPassword"
-            Margin="10"
-            HorizontalOptions="Center"
-            Text="Forgot Password?"
-            TextColor="#00C0FF"
-            TextDecorations="Underline">
+                    x:Name="LabelForgotPassword"
+                    Grid.Row="2"
+                    Margin="10"
+                    HorizontalOptions="Center"
+                    Text="Forgot Password?"
+                    TextColor="DodgerBlue"
+                    TextDecorations="Underline">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ForgotPasswordTapped" />
                     </Label.GestureRecognizers>
                 </Label>
 
+                <Label 
+                    Grid.Row="3"
+                    Margin="10"
+                    Text="Register"
+                    HorizontalOptions="Center"
+                    TextColor="DodgerBlue">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="RegisterTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                
             </StackLayout>
-            <Label Padding="50" Text="Register" HorizontalOptions="Center"
-                   TextColor="#00C0FF"
-                   Margin="20,5,20,10">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="RegisterTapped"/>
-                </Label.GestureRecognizers>
-            </Label>
-        </StackLayout>
+        </FlexLayout>
+        
         <Label
             x:Name="LabelConnection"
+            Grid.Row="1"
             Margin="10"
             HorizontalOptions="Center"
             IsVisible="False"
             Opacity="0"
             Text="Disconnected" 
             TextColor="#5D98B8"/>
-    </AbsoluteLayout>
+    </Grid>
 </ContentPage>

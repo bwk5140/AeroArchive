@@ -1,0 +1,49 @@
+﻿.body {
+    color: #374955;
+    align-items: center;
+    justify-content: center;
+    background-color: #EFFBFF;
+}
+
+.container {
+    background-color: aliceblue;
+    width: 400;
+    height: 500;
+    flex-direction: column;
+    margin-top: -30;
+}
+
+.login-form {
+    height: 260;
+    flex-direction: column;
+    margin-top: 20;
+}
+
+.logo {
+    font-size: 20;
+    margin-top: 20;
+    text-align: center;
+}
+
+entry {
+    height: 50;
+    margin: 10 20 0;
+    color: #EFFBFF;
+}
+
+button {
+    background-color: dodgerblue;
+    margin: 25 20 0;
+}
+
+.Valid {
+    background-color: #EFFBFF;
+}
+
+.InValid {
+    background-color: #ff0000;
+}
+
+.strength {
+    margin-top: 20;
+}

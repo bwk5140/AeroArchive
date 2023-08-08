@@ -3,14 +3,18 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Diagnostics;
+using System.ComponentModel;
+using Utils;
 
 namespace AeroArchive.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [QueryProperty(nameof(ItemId), nameof(ItemId))]
-    public partial class RegistrationPage : ContentPage
+    //[QueryProperty(nameof(ItemId), nameof(ItemId))]
+    public partial class RegistrationPage : ContentPage, INotifyPropertyChanged
     {
         public Command RegistrationCommand { get; }
+        public bool IsValidated { get; set; }
+        /*
         public string ItemId
         {
             set
@@ -18,11 +22,18 @@ namespace AeroArchive.Views
                 LoadRegistration(value);
             }
         }
+        */
         public RegistrationPage()
         {
             InitializeComponent();
             BindingContext = new Registration();
             //BindingContext = new RegistrationViewModel();
+        }
+
+        private async void SignInTapped(object sender, EventArgs e)
+        {
+            // Navigate backwards
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
 
         protected override async void OnAppearing()
@@ -33,21 +44,22 @@ namespace AeroArchive.Views
             // data source for the CollectionView.
             await App.Account_Database.GetRegistrationDetsAsync();
         }
-
+        /*
         async void LoadRegistration(string itemId)
         {
             try
             {
                 int id = Convert.ToInt32(itemId);
                 // Retrieve the account and set it as the BindingContext of the page.
-                Registration registration = await App.Account_Database.GetRegistrationDetsAsync(id);
-                BindingContext = registration;
+                Registration user = await App.Account_Database.GetRegistrationDetsAsync(id);
+                BindingContext = user;
             }
             catch (Exception)
             {
                 Console.WriteLine("Failed to load account.");
             }
         }
+        */
 
         async void OnRegistrationClicked(object sender, EventArgs e)
         {
@@ -55,16 +67,71 @@ namespace AeroArchive.Views
             registration.Date = DateTime.UtcNow;
 
             var isValid = true;
-            if (!string.IsNullOrWhiteSpace(registration.FirstName)
-                && !string.IsNullOrWhiteSpace(registration.LastName)
-                && !string.IsNullOrWhiteSpace(registration.UserName)
-                && !string.IsNullOrWhiteSpace(registration.Email)
-                && !string.IsNullOrWhiteSpace(registration.Password))
+
+            if (string.IsNullOrWhiteSpace(FirstNameEntry.Text) || FirstNameEntry.Text.Length < 2)
+            {
+                VisualStateManager.GoToState(FirstNameEntry, "Invalid");
+                isValid = false;
+            }
+            else
+            {
+                VisualStateManager.GoToState(FirstNameEntry, "Valid");
+            }
+            if (string.IsNullOrWhiteSpace(LastNameEntry.Text) || LastNameEntry.Text.Length < 2)
+            {
+                VisualStateManager.GoToState(LastNameEntry, "Invalid");
+                isValid = false;
+            }
+            else
+            {
+                VisualStateManager.GoToState(LastNameEntry, "Valid");
+            }
+            if (string.IsNullOrWhiteSpace(UserNameEntry.Text) || UserNameEntry.Text.Length < 5)
+            {
+                VisualStateManager.GoToState(UserNameEntry, "Invalid");
+                isValid = false;
+            }
+            else
+            {
+                VisualStateManager.GoToState(UserNameEntry, "Valid");
+            }
+            if (string.IsNullOrWhiteSpace(EmailEntry.Text) || EmailEntry.Text.Length < 6)
+            {
+                VisualStateManager.GoToState(EmailEntry, "Invalid");
+                isValid = false;
+            }
+            else
+            {
+                VisualStateManager.GoToState(EmailEntry, "Valid");
+            }
+            if (string.IsNullOrWhiteSpace(PasswordEntry.Text) || PasswordEntry.Text.Length < 5)
+            {
+                VisualStateManager.GoToState(PasswordEntry, "Invalid");
+                isValid = false;
+            }
+            else
+            {
+                VisualStateManager.GoToState(PasswordEntry, "Valid");
+            }
+            if(isValid)
             {
                 var items = await App.Account_Database.GetRegistrationDetsAsync();
                 foreach (var item in items)
                 {
-                    if (item.UserName == registration.UserName)
+                    if (item.UserName == registration.UserName && item.Email == registration.Email)
+                    {
+                        await DisplayAlert("User is already registered", "", "Ok");
+                        VisualStateManager.GoToState(UserNameEntry, "Invalid");
+                        VisualStateManager.GoToState(EmailEntry, "Invalid");
+                        isValid = false;
+                    }
+                    else
+                    {
+                        VisualStateManager.GoToState(UserNameEntry, "Valid");
+                        VisualStateManager.GoToState(EmailEntry, "Valid");
+                    }
+
+                    if (item.UserName == registration.UserName && isValid)
                     {
                         await DisplayAlert("Username is already taken", "", "Ok");
                         VisualStateManager.GoToState(UserNameEntry, "Invalid");
@@ -75,7 +142,7 @@ namespace AeroArchive.Views
                         VisualStateManager.GoToState(UserNameEntry, "Valid");
                     }
 
-                    if (item.Email == registration.Email)
+                    if (item.Email == registration.Email && isValid)
                     {
                         await DisplayAlert("Email is already registered", "", "Ok");
                         VisualStateManager.GoToState(EmailEntry, "Invalid");
@@ -102,6 +169,15 @@ namespace AeroArchive.Views
                     Debug.WriteLine(ex);
                 }
             }
+        }
+
+        void Handle_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            VisualStateManager.GoToState(FirstNameEntry, "Valid");
+            VisualStateManager.GoToState(LastNameEntry, "Valid");
+            VisualStateManager.GoToState(UserNameEntry, "Valid");
+            VisualStateManager.GoToState(EmailEntry, "Valid");
+            VisualStateManager.GoToState(PasswordEntry, "Valid");
         }
     }
 

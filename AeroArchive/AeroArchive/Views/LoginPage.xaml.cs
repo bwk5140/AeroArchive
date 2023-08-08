@@ -166,6 +166,7 @@ namespace AeroArchive.Views
             var strength = PasswordAdvisor.CheckStrength(e.NewTextValue);
             var strengthName = Enum.GetName(typeof(PasswordScore), strength);
             VisualStateManager.GoToState(this.StrengthIndicator, strengthName);
+            VisualStateManager.GoToState(UserNameEntry, "Valid");
         }
 
         string strength;

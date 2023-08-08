@@ -5,68 +5,96 @@
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False">
 
-    <AbsoluteLayout>
-        <StackLayout AbsoluteLayout.LayoutBounds="1, 0.5, 1,0.5"    
-                     AbsoluteLayout.LayoutFlags="All"    
-                     HorizontalOptions="Center"    
-                     VerticalOptions="Center"
-                     BackgroundColor="#EFFBFF"
-                     Padding="50">
-            
-            <StackLayout
-                Orientation="Horizontal"
-                WidthRequest="400" HorizontalOptions="Center">
-                <Entry
-                    Placeholder="First Name"
-                    Text="{Binding FirstName}"
-                    HorizontalOptions="FillAndExpand"
-                    Margin="20,5,20,10"
-                    PlaceholderColor="#5D98B8"
-                    BackgroundColor="#EFFBFF"/>
-                <Entry 
-                    Placeholder="Last Name"
-                    Text="{Binding LastName}"
-                    HorizontalOptions="FillAndExpand"
-                    Margin="20,5,20,10"
-                    PlaceholderColor="#5D98B8"
-                    BackgroundColor="#EFFBFF"/>
-            </StackLayout>
-            <StackLayout
-                WidthRequest="400" HorizontalOptions="Center"
-                Orientation="Vertical">
-                <Entry x:Name="UserNameEntry"
+    <ContentPage.Resources>
+        <ResourceDictionary Source="../Resources/Fonts/FontRD.xaml" />
+        <ResourceDictionary Source="../Resources/Fonts/EntryValidationRD.xaml" />
+        <StyleSheet Source="../Styles/RegistrationPage.css" />
+    </ContentPage.Resources>
+
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <FlexLayout x:Name="Form" StyleClass="body">
+            <StackLayout x:Name="RegistrationForm" StyleClass="container">
+                <Label StyleClass="logo" Text="Create new account" TextColor="DodgerBlue" />
+                <StackLayout StyleClass="registration-form"
+                             Orientation="Horizontal">
+
+                    <Entry
+                        x:Name="FirstNameEntry"
+                        IsSpellCheckEnabled="false"
+                        Placeholder="First Name"
+                        HorizontalOptions="FillAndExpand"
+                        PlaceholderColor="Gray"
+                        Text="{Binding FirstName}"
+                        TextColor="DarkSlateGray"
+                        TextChanged="Handle_TextChanged"/>
+                    <Entry
+                        x:Name="LastNameEntry"
+                        IsSpellCheckEnabled="false"
+                        Placeholder="Last Name"
+                        HorizontalOptions="FillAndExpand"
+                        PlaceholderColor="Gray"
+                        Text="{Binding LastName}"
+                        TextColor="DarkSlateGray" 
+                        TextChanged="Handle_TextChanged"/>
+                
+                </StackLayout>
+                
+                <StackLayout Orientation="Vertical">
+                    <Entry 
+                       x:Name="UserNameEntry"
                        Placeholder="Username"
+                       PlaceholderColor="Gray"
                        Text="{Binding UserName}"
-                       HorizontalOptions="FillAndExpand"
-                       Margin="20,5,20,10"
-                       PlaceholderColor="#5D98B8"
-                       BackgroundColor="#EFFBFF">
-                </Entry>
-                <Entry x:Name="EmailEntry"
+                       TextColor="DarkSlateGray"
+                       TextChanged="Handle_TextChanged">
+                    </Entry>
+
+                    <Entry 
+                       x:Name="EmailEntry"
                        Placeholder="Email"
+                       PlaceholderColor="Gray"
                        Text="{Binding Email}"
-                       HorizontalOptions="FillAndExpand"
-                       Margin="20,5,20,10"
-                       PlaceholderColor="#5D98B8"
-                       BackgroundColor="#EFFBFF">
-                </Entry>
-            </StackLayout>
-            <StackLayout 
-                WidthRequest="400" HorizontalOptions="Center">
-                <Entry IsPassword="True" Placeholder="Password"
+                       TextColor="DarkSlateGray"
+                       TextChanged="Handle_TextChanged">
+                    </Entry>
+                        
+                    <Entry
+                       x:Name="PasswordEntry"
+                       IsPassword="True" 
+                       Placeholder="Password"
+                       PlaceholderColor="Gray"
                        Text="{Binding Password}"
-                       HorizontalOptions="FillAndExpand"
-                       Margin="20,5,20,10"
-                       PlaceholderColor="#5D98B8"
-                       BackgroundColor="#EFFBFF"/>
+                       TextColor="DarkSlateGray"
+                       TextChanged="Handle_TextChanged">
+                    </Entry>
+                        
+                    <Button Clicked="OnRegistrationClicked" Text="Submit" 
+                            TextColor="WhiteSmoke"/>
+                    <StackLayout
+                        Padding="20"
+                        Margin="50,10"
+                        IsVisible="True"
+                        Orientation="Horizontal">
+                        <Label Text="Have an account?"
+                               HorizontalOptions="Center"
+                               TextColor="DarkSlateGray"/>
+                        <Label Text="Sign in"
+                               TextColor="DodgerBlue">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SignInTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                        
+                    </StackLayout>
+                </StackLayout>
+
             </StackLayout>
-            <StackLayout>
-                <Button Text="Create new account" 
-                        Clicked="OnRegistrationClicked"
-                        Margin="20,5,20,10"
-                        Button.BackgroundColor="#00C0FF"
-                        Button.TextColor="#E6F4F1"/>
-            </StackLayout>
-        </StackLayout>
-    </AbsoluteLayout>
+        </FlexLayout>
+    </Grid>
+
 </ContentPage>
