@@ -65,16 +65,5 @@ namespace AeroArchive.ViewModels
 
             await ExecuteLoadAccountsCommand();
         }
-        /*
-        public Registration _selectedAccount
-        {
-            get => _selectedAccount;
-            set
-            {
-                SetProperty(ref _selectedAccount, value);
-                OnAccountSelected(value);
-            }
-        }
-        */
     }
 }

@@ -1,7 +1,5 @@
-﻿using AeroArchive.AppDatabase;
-using AeroArchive.Models;
+﻿using AeroArchive.Models;
 using System;
-using System.Linq;
 using Utils;
 using Xamarin.Essentials;
 using Xamarin.Forms;

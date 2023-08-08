@@ -4,30 +4,19 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Diagnostics;
 using System.ComponentModel;
-using Utils;
 
 namespace AeroArchive.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    //[QueryProperty(nameof(ItemId), nameof(ItemId))]
     public partial class RegistrationPage : ContentPage, INotifyPropertyChanged
     {
         public Command RegistrationCommand { get; }
         public bool IsValidated { get; set; }
-        /*
-        public string ItemId
-        {
-            set
-            {
-                LoadRegistration(value);
-            }
-        }
-        */
+        
         public RegistrationPage()
         {
             InitializeComponent();
             BindingContext = new Registration();
-            //BindingContext = new RegistrationViewModel();
         }
 
         private async void SignInTapped(object sender, EventArgs e)
@@ -44,23 +33,7 @@ namespace AeroArchive.Views
             // data source for the CollectionView.
             await App.Account_Database.GetRegistrationDetsAsync();
         }
-        /*
-        async void LoadRegistration(string itemId)
-        {
-            try
-            {
-                int id = Convert.ToInt32(itemId);
-                // Retrieve the account and set it as the BindingContext of the page.
-                Registration user = await App.Account_Database.GetRegistrationDetsAsync(id);
-                BindingContext = user;
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Failed to load account.");
-            }
-        }
-        */
-
+        
         async void OnRegistrationClicked(object sender, EventArgs e)
         {
             var registration = (Registration)BindingContext;
