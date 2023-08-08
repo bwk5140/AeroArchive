@@ -26,21 +26,24 @@
                     <Image Source="imagikCorpLogo.png" VerticalOptions="Center" HeightRequest="64" />
                 </ContentView>
             </StackLayout>
+            
         </StackLayout>
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-                <Label Text="Where Innovation Meets Affordability" FontSize="Title"/>
-                <Label FontSize="16" Padding="0,24,0,0">
+                <ContentView  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <Image Source="imagikmotto.png" VerticalOptions="CenterAndExpand" />
+                </ContentView>
+                <Label FontSize="16" Padding="0,50,0,0">
                     <Label.FormattedText>
                         <FormattedString>
                             <FormattedString.Spans>
-                                <Span Text="Learn more at "/>
-                                <Span Text="https://imagikcorp.com/" FontAttributes="Bold"/>
+                                <Span Text="News and more:" FontAttributes="Bold"/>
                             </FormattedString.Spans>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Button Margin="0,10,0,0" Text="Learn more"
+                <Button 
+                        Margin="0,10,0,0" Text="Learn more"
                         Command="{Binding OpenWebCommand}"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
