@@ -27,7 +27,6 @@
                         MaxLength="7"
                         Placeholder="UserName"
                         PlaceholderColor="DarkSlateGray"
-                        Text="{Binding UserName}"
                         TextColor="DarkSlateGray" 
                         TextChanged="Handle_TextChanged"/>
                     <Entry

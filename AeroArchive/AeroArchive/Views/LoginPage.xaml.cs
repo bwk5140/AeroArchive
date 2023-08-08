@@ -1,5 +1,7 @@
-﻿using AeroArchive.Models;
+﻿using AeroArchive.AppDatabase;
+using AeroArchive.Models;
 using System;
+using System.Linq;
 using Utils;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -10,6 +12,7 @@ namespace AeroArchive.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
+        bool isValid = true;
         public LoginPage()
         {
             InitializeComponent();
@@ -52,8 +55,6 @@ namespace AeroArchive.Views
                 return;
             }
 
-            var isValid = true;
-
             if (string.IsNullOrEmpty(UserNameEntry.Text) || UserNameEntry.Text.Length < 5)
             {
                 VisualStateManager.GoToState(UserNameEntry, "Invalid");
@@ -74,6 +75,40 @@ namespace AeroArchive.Views
             {
                 VisualStateManager.GoToState(PasswordEntry, "Valid");
             }
+
+            var list = await App.Account_Database.GetRegistrationDetsAsync();
+
+            if (list.Count == 0)
+            {
+                isValid = false;
+                await DisplayAlert("Please create an account", "", "OK");
+            }
+
+            else
+            {
+                foreach (var item in list)
+                {
+                    if (UserNameEntry.Text.Equals(item.UserName) && PasswordEntry.Text.Equals(item.Password))
+                    {
+                        isValid = true;
+                        break;
+                    }
+                    if (!UserNameEntry.Text.Equals(item.UserName))
+                    {
+                        isValid = false;
+                    }
+                    if (!PasswordEntry.Text.Equals(item.Password))
+                    {
+                        isValid = false;
+                    }
+                }
+            }
+
+            if (!isValid && list.Count > 0) 
+            { 
+                await DisplayAlert("Invalid username or password", "", "OK"); 
+            }
+
             var service = DependencyService.Get<IStatusBar>();
             service?.SetStatusBarColor(isValid ? Color.Green : Color.Red);
 
@@ -88,23 +123,11 @@ namespace AeroArchive.Views
                 {
                     throw new Exception(ex.ToString());
                 }
-                //await Clipboard.SetTextAsync("1234");
-                //if (ValidateUser(UserNameEntry.Text, PasswordEntry.Text))
-                    await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
-                //else
-                    //await DisplayAlert("Invalid username or password", "", "OK");
+
+                 await Clipboard.SetTextAsync("123");
+                 await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
             }
         }
-        /*
-        public bool ValidateUser(string username, string password)
-        {
-            var list = App.EmployeeDatabase.GetRegistrationDetsAsync();
-            if(list.Equals(username) && list.Equals(password))
-                return true;
-            else 
-                return false;
-        }
-        */
 
         protected override async void OnAppearing()
         {
@@ -167,6 +190,7 @@ namespace AeroArchive.Views
             var strengthName = Enum.GetName(typeof(PasswordScore), strength);
             VisualStateManager.GoToState(this.StrengthIndicator, strengthName);
             VisualStateManager.GoToState(UserNameEntry, "Valid");
+            VisualStateManager.GoToState(PasswordEntry, "Valid");
         }
 
         string strength;

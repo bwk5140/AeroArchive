@@ -16,7 +16,6 @@ namespace AeroArchive
                 if (AccountDatabase == null)
                 {
                     AccountDatabase = new RegistrationDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Registration.db3"));
-                    Console.WriteLine(AccountDatabase);
                 }
                 return AccountDatabase;
             }
@@ -31,7 +30,6 @@ namespace AeroArchive
                 if (ProdDatabase == null)
                 {
                     ProdDatabase = new ProductDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Products.db3"));
-                    Console.WriteLine(ProdDatabase);
                 }
                 return ProdDatabase;
             }
@@ -46,7 +44,6 @@ namespace AeroArchive
                 if (EmployeeDatabase == null)
                 {
                     EmployeeDatabase = new EmployeeDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Employees.db3"));
-                    Console.WriteLine(EmployeeDatabase);
                 }
                 return EmployeeDatabase;
             }
