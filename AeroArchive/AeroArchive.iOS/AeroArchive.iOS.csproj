@@ -157,4 +157,7 @@
   <ItemGroup>
     <BundleResource Include="imagikmotto.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="searchIcon.png" />
+  </ItemGroup>
 </Project>

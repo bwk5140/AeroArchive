@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AeroArchive.Views.SearchEmployeesPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:AeroArchive.ViewModels"  
+             xmlns:model="clr-namespace:AeroArchive.Models" x:DataType="local:SearchEmployeesViewModel">
+
+    <StackLayout>
+        <SearchBar x:Name="searchBar" Placeholder="Search employees" SearchCommand="{Binding SearchItemCommand}"
+                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                   PlaceholderColor="AntiqueWhite"
+                   BackgroundColor="#2196F3"/>
+
+        <RefreshView x:DataType="local:SearchEmployeesViewModel" Command="{Binding LoadEmployeesCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView x:Name="ItemListView"
+                ItemsSource="{Binding Employees}"
+                SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10" x:DataType="model:Employee">
+                            <Label Text="{Binding FullName}"
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="15" />
+                            <Label Text="{Binding EmployeeID}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemDetailTextStyle}" 
+                            FontSize="13" />
+                            <Label Text="{Binding Role}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemDetailTextStyle}" 
+                            FontSize="13" />
+                            <Label Text="{Binding Email}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemDetailTextStyle}" 
+                            FontSize="13" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:SearchEmployeesViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
+</ContentPage>

@@ -1,12 +1,14 @@
-﻿using AeroArchive.ViewModels;
+﻿using AeroArchive.Models;
+using AeroArchive.ViewModels;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
 
 namespace AeroArchive.Views
 {
     public partial class ProductsPage : ContentPage
     {
-        ProductsViewModel _viewModel;
-
+        readonly ProductsViewModel _viewModel;
+        
         public ProductsPage()
         {
             InitializeComponent();

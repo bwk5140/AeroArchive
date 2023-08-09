@@ -8,30 +8,20 @@ using Xamarin.Forms;
 
 namespace AeroArchive.ViewModels
 {
-    public class ProductsViewModel : BaseViewModel
+    public class SearchProductsViewModel : BaseViewModel
     {
         private Item _selectedItem;
-
         public ObservableCollection<Item> Items { get; }
-        //public ObservableCollection<Item> Product { get; }
-        public Command LoadItemsCommand { get; }
-        public Command AddItemCommand { get; }
-        public Command ClearItemCommand { get; }
-        public Command<Item> ItemTapped { get; }
         public Command SearchItemCommand { get; }
+        public Command LoadItemsCommand { get; }
+        public Command<Item> ItemTapped { get; }
 
-        public ProductsViewModel()
+        public SearchProductsViewModel()
         {
-            Title = "Products";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
-            ItemTapped = new Command<Item>(OnItemSelected);
-
-            AddItemCommand = new Command(OnAddItem);
-
-            ClearItemCommand = new Command(OnClearItem);
             SearchItemCommand = new Command(OnSearchItem);
+            ItemTapped = new Command<Item>(OnItemSelected);
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -56,13 +46,12 @@ namespace AeroArchive.ViewModels
                 IsBusy = false;
             }
         }
-
+        
         public void OnAppearing()
         {
             IsBusy = true;
             SelectedItem = null;
         }
-
         public Item SelectedItem
         {
             get => _selectedItem;
@@ -72,27 +61,6 @@ namespace AeroArchive.ViewModels
                 OnItemSelected(value);
             }
         }
-
-        private async void OnAddItem(object obj)
-        {
-            await Shell.Current.GoToAsync(nameof(NewItemPage));
-        }
-
-        private async void OnClearItem(object obj)
-        {
-            string response;
-            response = await Application.Current.MainPage.DisplayActionSheet("Clear product database?", "Cancel" , "Clear", "Yes", "No");
-            
-            if (response != null && (response == "Clear" || response == "Yes"))
-            {
-                await App.Prod_Database.ClearProductDBAsync();
-            }
-            else if (response != null && (response == "Cancel" || response == "No"))
-                return;
-            
-            await ExecuteLoadItemsCommand();
-        }
-
         async void OnItemSelected(Item item)
         {
             if (item == null)
@@ -102,9 +70,39 @@ namespace AeroArchive.ViewModels
             await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.ID}");
         }
 
-        async void OnSearchItem (Object obj)
+        async void OnSearchItem(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(SearchProductsPage));
+            try
+            {
+                Items.Clear();
+                string lowercaseItem, lowercaseWarranty, lowercaseDescription;
+                var text = (string)obj;
+                var items = await App.Prod_Database.GetProductDetsAsync();
+
+                foreach (var item in items)
+                {
+                    lowercaseItem = item.Text.ToLower();
+                    lowercaseWarranty = item.WarrantyStatus.ToLower();
+                    lowercaseDescription = item.Description.ToLower();
+
+                    if (item.Text.Contains(text) || lowercaseItem.Contains(text))
+                    {
+                        Items.Add(item);
+                    }
+                    else if (item.WarrantyStatus.Contains(text) || lowercaseWarranty.Contains(text))
+                    {
+                        Items.Add(item);
+                    }
+                    else if (item.Description.Contains(text) || lowercaseDescription.Contains(text))
+                    {
+                        Items.Add(item);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
     }
 }

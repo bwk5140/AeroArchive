@@ -1,19 +1,17 @@
 ﻿using AeroArchive.ViewModels;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace AeroArchive.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AccountPage : ContentPage
+    public partial class SearchProductsPage : ContentPage
     {
-        readonly AccountViewModel _viewModel;
-        public AccountPage()
+        readonly SearchProductsViewModel _viewModel;
+        public SearchProductsPage()
         {
             InitializeComponent();
-            BindingContext = _viewModel = new AccountViewModel();
+            BindingContext = _viewModel = new SearchProductsViewModel();
         }
-
+        
         protected override void OnAppearing()
         {
             base.OnAppearing();

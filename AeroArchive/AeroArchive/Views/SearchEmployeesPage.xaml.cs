@@ -1,17 +1,15 @@
 ﻿using AeroArchive.ViewModels;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace AeroArchive.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AccountPage : ContentPage
+    public partial class SearchEmployeesPage : ContentPage
     {
-        readonly AccountViewModel _viewModel;
-        public AccountPage()
+        readonly SearchEmployeesViewModel _viewModel;
+        public SearchEmployeesPage()
         {
             InitializeComponent();
-            BindingContext = _viewModel = new AccountViewModel();
+            BindingContext = _viewModel = new SearchEmployeesViewModel();
         }
 
         protected override void OnAppearing()

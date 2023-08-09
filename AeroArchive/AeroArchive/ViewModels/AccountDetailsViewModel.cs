@@ -17,7 +17,6 @@ namespace AeroArchive.ViewModels
         private string email;
         private string username;
         private string passWord;
-        private Registration userAccount;
         public int ID { get; set; }
 
         public AccountDetailsViewModel()
@@ -73,7 +72,6 @@ namespace AeroArchive.ViewModels
             {
                 ID = Convert.ToInt32(itemId);
                 var item = await App.Account_Database.GetRegistrationDetsAsync(Convert.ToInt32(itemId));
-                userAccount = item;
                 FirstName = item.FirstName;
                 LastName = item.LastName;
                 UserName = item.UserName;

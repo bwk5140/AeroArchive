@@ -1,14 +1,16 @@
 ﻿using AeroArchive.Models;
 using AeroArchive.Views;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace AeroArchive.ViewModels
 {
-    public class EmployeesViewModel : BaseViewModel
+    public class SearchEmployeesViewModel : BaseViewModel
     {
         private Employee _selectedEmployee;
 
@@ -19,17 +21,13 @@ namespace AeroArchive.ViewModels
         public Command<Employee> ItemTapped { get; }
         public Command SearchItemCommand { get; }
 
-        public EmployeesViewModel()
+        public SearchEmployeesViewModel()
         {
-            Title = "Employees";
             Employees = new ObservableCollection<Employee>();
             LoadEmployeesCommand = new Command(async () => await ExecuteLoadEmployeesCommand());
 
             ItemTapped = new Command<Employee>(OnEmployeeSelected);
 
-            AddEmployeeCommand = new Command(OnAddEmployee);
-
-            ClearEmployeeCommand = new Command(OnClearEmployees);
             SearchItemCommand = new Command(OnSearchItem);
         }
 
@@ -72,25 +70,6 @@ namespace AeroArchive.ViewModels
             }
         }
 
-        private async void OnAddEmployee(object obj)
-        {
-            await Shell.Current.GoToAsync(nameof(NewEmployeePage));
-        }
-        private async void OnClearEmployees()
-        {
-            string response;
-            response = await Application.Current.MainPage.DisplayActionSheet("Clear employee database?", "Cancel", "Clear", "Yes", "No");
-
-            if (response != null && (response == "Clear" || response == "Yes"))
-            {
-                await App.Employee_Database.ClearEmployeeDBAsync();
-            }
-            else if (response != null && (response == "Cancel" || response == "No"))
-                return;
-
-            await ExecuteLoadEmployeesCommand();
-        }
-
         async void OnEmployeeSelected(Employee employee)
         {
             if (employee == null)
@@ -102,8 +81,37 @@ namespace AeroArchive.ViewModels
 
         async void OnSearchItem(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(SearchEmployeesPage));
-        }
+            try
+            {
+                Employees.Clear();
+                string lowercaseName, lowercaseID, lowercaseRole;
+                var text = (string)obj;
+                var items = await App.Employee_Database.GetEmployeeDetsAsync();
 
+                foreach (var item in items)
+                {
+                    lowercaseName = item.FullName.ToLower();
+                    lowercaseID = item.EmployeeID.ToLower();
+                    lowercaseRole = item.Role.ToLower();
+
+                    if (item.FullName.Contains(text) || lowercaseName.Contains(text))
+                    {
+                        Employees.Add(item);
+                    }
+                    else if (item.EmployeeID.Contains(text) || lowercaseID.Contains(text))
+                    {
+                        Employees.Add(item);
+                    }
+                    else if (item.Role.Contains(text) || lowercaseRole.Contains(text))
+                    {
+                        Employees.Add(item);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
     }
 }
