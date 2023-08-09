@@ -16,6 +16,7 @@ namespace AeroArchive
             Routing.RegisterRoute(nameof(NewEmployeePage), typeof(NewEmployeePage));
             Routing.RegisterRoute(nameof(EditEmployeePage), typeof(EditEmployeePage));
             Routing.RegisterRoute(nameof(RegistrationPage), typeof(RegistrationPage));
+            Routing.RegisterRoute(nameof(AccountDetailsPage), typeof(AccountDetailsPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

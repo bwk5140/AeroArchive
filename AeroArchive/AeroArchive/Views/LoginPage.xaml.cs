@@ -121,7 +121,8 @@ namespace AeroArchive.Views
 
                 try
                 {
-                    await SecureStorage.SetAsync("token", PasswordEntry.Text);
+                    await SecureStorage.SetAsync("UserNametoken", UserNameEntry.Text);
+                    await SecureStorage.SetAsync("Passwordtoken", PasswordEntry.Text);
                 }
                 catch (Exception ex)
                 {
@@ -141,7 +142,9 @@ namespace AeroArchive.Views
 
             try
             {
-                var password = await SecureStorage.GetAsync("token");
+                var username = await SecureStorage.GetAsync("UserNametoken");
+                var password = await SecureStorage.GetAsync("Passwordtoken");
+                UserNameEntry.Text = username;
                 PasswordEntry.Text = password;
             }
             catch (Exception ex)

@@ -86,7 +86,16 @@ namespace AeroArchive.Views
             {
                 VisualStateManager.GoToState(PasswordEntry, "Valid");
             }
-            if(isValid)
+            if (string.IsNullOrWhiteSpace(ConfirmPasswordEntry.Text) || ConfirmPasswordEntry.Text.Length < 5)
+            {
+                VisualStateManager.GoToState(ConfirmPasswordEntry, "Invalid");
+                isValid = false;
+            }
+            else
+            {
+                VisualStateManager.GoToState(ConfirmPasswordEntry, "Valid");
+            }
+            if (isValid)
             {
                 var items = await App.Account_Database.GetRegistrationDetsAsync();
                 foreach (var item in items)
@@ -125,6 +134,17 @@ namespace AeroArchive.Views
                     {
                         VisualStateManager.GoToState(EmailEntry, "Valid");
                     }
+                    if (PasswordEntry.Text != ConfirmPasswordEntry.Text)
+                    {
+                        VisualStateManager.GoToState(PasswordEntry, "Invalid");
+                        VisualStateManager.GoToState(ConfirmPasswordEntry, "Invalid");
+                        isValid = false;
+                    }
+                    else
+                    {
+                        VisualStateManager.GoToState(PasswordEntry, "Valid");
+                        VisualStateManager.GoToState(ConfirmPasswordEntry, "Valid");
+                    }
                 }
             }
             if (isValid)
@@ -151,6 +171,7 @@ namespace AeroArchive.Views
             VisualStateManager.GoToState(UserNameEntry, "Valid");
             VisualStateManager.GoToState(EmailEntry, "Valid");
             VisualStateManager.GoToState(PasswordEntry, "Valid");
+            VisualStateManager.GoToState(ConfirmPasswordEntry, "Valid");
         }
     }
 

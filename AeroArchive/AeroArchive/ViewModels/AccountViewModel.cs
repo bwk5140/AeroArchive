@@ -1,26 +1,31 @@
 ﻿using AeroArchive.Models;
+using AeroArchive.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace AeroArchive.ViewModels
 {
     public class AccountViewModel : BaseViewModel
     {
-        private Registration _selectedAccount;
+        private Registration userAccount;
+        private Registration _selectedItem;
         public ObservableCollection<Registration> Accounts { get; }
         public Command LoadAccountsCommand { get; }
-        public Command ClearItemCommand { get; }
+        public Command DeleteItemCommand { get; }
+        public Command<Registration> ItemTapped { get; }
+
         public AccountViewModel() 
         {
-            Title = "Accounts";
+            Title = "Account";
             Accounts = new ObservableCollection<Registration>();
             LoadAccountsCommand = new Command(async () => await ExecuteLoadAccountsCommand());
-            ClearItemCommand = new Command(OnClearItem);
+            ItemTapped = new Command<Registration>(OnItemSelected);
+            DeleteItemCommand = new Command(OnDeleteItem);
         }
-
         async Task ExecuteLoadAccountsCommand()
         {
             IsBusy = true;
@@ -28,10 +33,19 @@ namespace AeroArchive.ViewModels
             try
             {
                 Accounts.Clear();
+                var username = await SecureStorage.GetAsync("UserNametoken");
+                var password = await SecureStorage.GetAsync("Passwordtoken");
+
                 var items = await App.Account_Database.GetRegistrationDetsAsync();
+
                 foreach (var item in items)
                 {
-                    Accounts.Add(item);
+                    if (username == item.UserName && password == item.Password)
+                    {
+                        Accounts.Add(item);
+                        userAccount = item;
+                        break;
+                    }
                 }
             }
             catch (Exception ex)
@@ -44,26 +58,46 @@ namespace AeroArchive.ViewModels
             }
         }
 
-        
         public void OnAppearing()
         {
             IsBusy = true;
-            _selectedAccount = null;
+            SelectedItem = null;
         }
 
-        private async void OnClearItem(object obj)
+        public Registration SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                SetProperty(ref _selectedItem, value);
+                OnItemSelected(value);
+            }
+        }
+
+
+        private async void OnDeleteItem(object obj)
         {
             string response;
-            response = await Application.Current.MainPage.DisplayActionSheet("Clear account database?", "Cancel", "Clear", "Yes", "No");
+            response = await Application.Current.MainPage.DisplayActionSheet("Delete account?", "Cancel", "Delete", "Yes", "No");
             
-            if (response != null && (response == "Clear" || response == "Yes"))
+            if (response != null && (response == "Yes" || response == "Delete"))
             {
-                await App.Account_Database.ClearAccountsDBAsync();
+                await App.Account_Database.DeleteRegistrationDetsAsync(userAccount);
+                await Shell.Current.GoToAsync("//LoginPage");
             }
             else if (response != null && (response == "Cancel" || response == "No"))
                 return;
 
             await ExecuteLoadAccountsCommand();
+        }
+
+        async void OnItemSelected(Registration item)
+        {
+            if (item == null)
+                return;
+
+            // This will push the ItemDetailPage onto the navigation stack
+            await Shell.Current.GoToAsync($"{nameof(AccountDetailsPage)}?{nameof(AccountDetailsViewModel.ItemId)}={item.ID}");
         }
     }
 }

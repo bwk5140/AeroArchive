@@ -8,7 +8,7 @@
 .container {
     background-color: aliceblue;
     width: 400;
-    height: 450;
+    height: 550;
     flex-direction: column;
     margin-top: -30;
 }

@@ -21,7 +21,7 @@
             <StackLayout x:Name="RegistrationForm" StyleClass="container">
                 <Label StyleClass="logo" Text="Create new account" TextColor="DodgerBlue" />
                 <StackLayout StyleClass="registration-form"
-                             Orientation="Horizontal">
+                             Orientation="Vertical">
 
                     <Entry
                         x:Name="FirstNameEntry"
@@ -42,11 +42,9 @@
                         TextColor="DarkSlateGray" 
                         TextChanged="Handle_TextChanged"/>
                 
-                </StackLayout>
-                
-                <StackLayout Orientation="Vertical">
                     <Entry 
                        x:Name="UserNameEntry"
+                       MaxLength="7"
                        Placeholder="Username"
                        PlaceholderColor="Gray"
                        Text="{Binding UserName}"
@@ -72,9 +70,20 @@
                        TextColor="DarkSlateGray"
                        TextChanged="Handle_TextChanged">
                     </Entry>
-                        
+
+                    <Entry
+                       x:Name="ConfirmPasswordEntry"
+                       IsPassword="True" 
+                       Placeholder="Confirm password"
+                       PlaceholderColor="Gray"
+                       Text="{Binding ConfirmPassword}"
+                       TextColor="DarkSlateGray"
+                       TextChanged="Handle_TextChanged">
+                    </Entry>
+
                     <Button Clicked="OnRegistrationClicked" Text="Submit" 
                             TextColor="WhiteSmoke"/>
+                    
                     <StackLayout
                         Padding="20"
                         Margin="50,10"

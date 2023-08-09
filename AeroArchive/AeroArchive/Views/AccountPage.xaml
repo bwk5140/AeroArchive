@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:AeroArchive.ViewModels"
              xmlns:model="clr-namespace:AeroArchive.Models"
-             x:Class="AeroArchive.Views.AccountPage">
+             x:Class="AeroArchive.Views.AccountPage"
+             Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Clear" Command="{Binding ClearItemCommand}" />
+        <ToolbarItem Text="Delete Account"
+                     Command="{Binding DeleteItemCommand}"/>
     </ContentPage.ToolbarItems>
-
 
     <RefreshView x:DataType="local:AccountViewModel" Command="{Binding LoadAccountsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <CollectionView x:Name="AccountsListView"
@@ -16,27 +17,50 @@
                 SelectionMode="None">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10" x:DataType="model:Registration">
-                        <Label Text="{Binding FirstName}" 
+                    <StackLayout Spacing="20" Padding="10" x:DataType="model:Registration">
+                        
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Hello, " 
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemTextStyle}" 
-                            FontSize="15" />
-                        <Label Text="{Binding LastName}" 
+                            FontSize="14" />
+                            <Label Text="{Binding FirstName}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="14" />
+                            <Label Text="{Binding LastName}" 
                             LineBreakMode="NoWrap"
-                            Style="{DynamicResource ListItemDetailTextStyle}"
-                            FontSize="13" />
-                        <Label Text="{Binding UserName}" 
+                            Style="{DynamicResource ListItemTextStyle}"
+                            FontSize="14" />
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Username: " 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="14" />
+                            <Label Text="{Binding UserName}" 
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemDetailTextStyle}" 
                             FontSize="13" />
-                        <Label Text="{Binding Email}" 
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Email: " 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="14" />
+                            <Label Text="{Binding Email}" 
                             LineBreakMode="NoWrap"
                             Style="{DynamicResource ListItemDetailTextStyle}"
                             FontSize="13" />
-                        <Label Text="{Binding Password}" 
+                        </StackLayout>
+                
+                        <Label Text="{Binding Password}"
+                            IsVisible="False"
                             LineBreakMode="NoWrap" 
                             Style="{DynamicResource ListItemDetailTextStyle}" 
-                            FontSize="13" />
+                            FontSize="Small" />
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"

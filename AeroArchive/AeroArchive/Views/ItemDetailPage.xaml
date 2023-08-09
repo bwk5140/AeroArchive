@@ -10,12 +10,18 @@
     </ContentPage.ToolbarItems>
 
     <StackLayout Spacing="20" Padding="15">
-        <Label Text="Product ID:" FontSize="Medium" />
-        <Label Text="{Binding Text}" FontSize="Small"/>
-        <Label Text="Warranty Status:" FontSize="Medium" />
-        <Label Text="{Binding WarrantyStatus}" FontSize="Small"/>
-        <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Description}" FontSize="Small"/>
+        <Label Text="Product ID:" FontSize="Medium" 
+               Style="{DynamicResource ListItemTextStyle}"/>
+        <Label Text="{Binding Text}" FontSize="Small"
+               Style="{DynamicResource ListItemDetailTextStyle}"/>
+        <Label Text="Warranty Status:" FontSize="Medium" 
+               Style="{DynamicResource ListItemTextStyle}"/>
+        <Label Text="{Binding WarrantyStatus}" FontSize="Small"
+               Style="{DynamicResource ListItemDetailTextStyle}"/>
+        <Label Text="Description:" FontSize="Medium" 
+               Style="{DynamicResource ListItemTextStyle}"/>
+        <Label Text="{Binding Description}" FontSize="Small"
+               Style="{DynamicResource ListItemDetailTextStyle}"/>
     </StackLayout>
 
 </ContentPage>

@@ -1,33 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:viewmodels="clr-namespace:AeroArchive.ViewModels" 
-             x:DataType="viewmodels:EmployeeDetailViewModel"
-             x:Class="AeroArchive.Views.EmployeeDetailPage"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AeroArchive.Views.AccountDetailsPage"
              Title="{Binding Title}">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Edit" Command="{Binding EditEmployeeCommand}" />
-        <ToolbarItem Text="Delete" Command="{Binding DeleteEmployeeCommand}" />
-    </ContentPage.ToolbarItems>
-
     <StackLayout Spacing="20" Padding="15">
-        <Label Text="Employee Name:" FontSize="Medium"
+        <Label Text="First Name:" FontSize="Medium" 
                Style="{DynamicResource ListItemTextStyle}"/>
-        <Label Text="{Binding Fullname}" FontSize="Small"
+        <Label Text="{Binding FirstName}" FontSize="Small"
                Style="{DynamicResource ListItemDetailTextStyle}"/>
-        <Label Text="Employee ID:" FontSize="Medium" 
+        <Label Text="Last Name:" FontSize="Medium" 
                Style="{DynamicResource ListItemTextStyle}"/>
-        <Label Text="{Binding EmployeeiD}" FontSize="Small"
+        <Label Text="{Binding LastName}" FontSize="Small"
                Style="{DynamicResource ListItemDetailTextStyle}"/>
-        <Label Text="Role:" FontSize="Medium" 
+        <Label Text="Username:" FontSize="Medium"
                Style="{DynamicResource ListItemTextStyle}"/>
-        <Label Text="{Binding Role}" FontSize="Small"
+        <Label Text="{Binding UserName}" FontSize="Small"
                Style="{DynamicResource ListItemDetailTextStyle}"/>
         <Label Text="Email:" FontSize="Medium" 
                Style="{DynamicResource ListItemTextStyle}"/>
         <Label Text="{Binding Email}" FontSize="Small"
                Style="{DynamicResource ListItemDetailTextStyle}"/>
+        <Label Text="Password:" FontSize="Medium"
+               Style="{DynamicResource ListItemTextStyle}"/>
+        <Label Text="{Binding Password}" FontSize="Small"
+               Style="{DynamicResource ListItemDetailTextStyle}"
+               IsVisible="False"/>
     </StackLayout>
-
 </ContentPage>
