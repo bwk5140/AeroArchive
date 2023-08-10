@@ -143,9 +143,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="imagikCorpLogo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="account.png" />
   </ItemGroup>
   <ItemGroup>
@@ -155,9 +152,18 @@
     <BundleResource Include="employees.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="imagikmotto.png" />
+    <BundleResource Include="searchIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="searchIcon.png" />
+    <BundleResource Include="psuMarkFooter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="PSUlogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="WeAre.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="AeroArchiveSplash.png" />
   </ItemGroup>
 </Project>

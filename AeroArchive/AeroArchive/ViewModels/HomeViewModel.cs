@@ -9,7 +9,7 @@ namespace AeroArchive.ViewModels
         public HomeViewModel()
         {
             Title = "Home";
-            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://imagikcorp.com/"));
+            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://bulletins.psu.edu/undergraduate/colleges/behrend/software-engineering-bs/"));
         }
 
         public ICommand OpenWebCommand { get; }

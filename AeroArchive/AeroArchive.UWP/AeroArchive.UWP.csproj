@@ -106,11 +106,9 @@
   <ItemGroup>
     <Content Include="account.png" />
     <Content Include="AeroArchive.png" />
+    <Content Include="AeroArchiveSplash.png" />
     <Content Include="employees.png" />
     <Content Include="home.png" />
-    <Content Include="imagikCorpLogo.png" />
-    <Content Include="imagikLogo.png" />
-    <Content Include="imagikmotto.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
@@ -139,7 +137,10 @@
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="PSUlogo.png" />
+    <Content Include="psuMarkFooter.png" />
     <Content Include="searchIcon.png" />
+    <Content Include="WeAre.jpg" />
     <Content Include="xamarin_logo.png" />
     <Content Include="icon_about.png" />
     <Content Include="icon_feed.png" />
