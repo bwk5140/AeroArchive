@@ -81,13 +81,13 @@ namespace AeroArchive.ViewModels
         private async void OnClearItem(object obj)
         {
             string response;
-            response = await Application.Current.MainPage.DisplayActionSheet("Clear product database?", "Cancel" , "Clear", "Yes", "No");
+            response = await Application.Current.MainPage.DisplayActionSheet("Clear product database?\n\n", "No", "Yes");
             
             if (response != null && (response == "Clear" || response == "Yes"))
             {
                 await App.Prod_Database.ClearProductDBAsync();
             }
-            else if (response != null && (response == "Cancel" || response == "No"))
+            else if (response == null || (response == "Cancel" || response == "No"))
                 return;
             
             await ExecuteLoadItemsCommand();

@@ -79,13 +79,13 @@ namespace AeroArchive.ViewModels
         private async void OnClearEmployees()
         {
             string response;
-            response = await Application.Current.MainPage.DisplayActionSheet("Clear employee database?", "Cancel", "Clear", "Yes", "No");
+            response = await Application.Current.MainPage.DisplayActionSheet("Clear employee database?\n\n", "No", "Yes");
 
             if (response != null && (response == "Clear" || response == "Yes"))
             {
                 await App.Employee_Database.ClearEmployeeDBAsync();
             }
-            else if (response != null && (response == "Cancel" || response == "No"))
+            else if (response == null || (response == "Cancel" || response == "No"))
                 return;
 
             await ExecuteLoadEmployeesCommand();

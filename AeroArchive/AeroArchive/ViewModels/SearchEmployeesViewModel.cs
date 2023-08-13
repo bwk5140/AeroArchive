@@ -84,7 +84,7 @@ namespace AeroArchive.ViewModels
             try
             {
                 Employees.Clear();
-                string lowercaseName, lowercaseID, lowercaseRole;
+                string lowercaseName, lowercaseID, lowercaseRole, lowercaseEmail;
                 var text = (string)obj;
                 var items = await App.Employee_Database.GetEmployeeDetsAsync();
 
@@ -93,6 +93,7 @@ namespace AeroArchive.ViewModels
                     lowercaseName = item.FullName.ToLower();
                     lowercaseID = item.EmployeeID.ToLower();
                     lowercaseRole = item.Role.ToLower();
+                    lowercaseEmail = item.Email.ToLower();
 
                     if (item.FullName.Contains(text) || lowercaseName.Contains(text))
                     {
@@ -103,6 +104,10 @@ namespace AeroArchive.ViewModels
                         Employees.Add(item);
                     }
                     else if (item.Role.Contains(text) || lowercaseRole.Contains(text))
+                    {
+                        Employees.Add(item);
+                    }
+                    else if(item.Email.Contains(text) || lowercaseEmail.Contains(text))
                     {
                         Employees.Add(item);
                     }

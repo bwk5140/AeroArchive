@@ -78,14 +78,14 @@ namespace AeroArchive.ViewModels
         private async void OnDeleteItem(object obj)
         {
             string response;
-            response = await Application.Current.MainPage.DisplayActionSheet("Delete account?", "Cancel", "Delete", "Yes", "No");
+            response = await Application.Current.MainPage.DisplayActionSheet("Delete account permanently?\n\n", "No", "Yes");
             
             if (response != null && (response == "Yes" || response == "Delete"))
             {
                 await App.Account_Database.DeleteRegistrationDetsAsync(userAccount);
                 await Shell.Current.GoToAsync("//LoginPage");
             }
-            else if (response != null && (response == "Cancel" || response == "No"))
+            else if (response == null || (response == "Cancel" || response == "No"))
                 return;
 
             await ExecuteLoadAccountsCommand();
