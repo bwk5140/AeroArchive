@@ -166,4 +166,10 @@
   <ItemGroup>
     <BundleResource Include="AeroArchiveSplash.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="iconEyeHide.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="iconEyeShow.png" />
+  </ItemGroup>
 </Project>

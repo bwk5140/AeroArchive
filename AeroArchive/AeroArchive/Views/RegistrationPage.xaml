@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AeroArchive.Views.RegistrationPage"
+             xmlns:local="clr-namespace:AeroArchive.Utils"
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False">
 
@@ -60,27 +61,57 @@
                        TextColor="DarkSlateGray"
                        TextChanged="Handle_TextChanged">
                     </Entry>
-                        
-                    <Entry
-                       x:Name="PasswordEntry"
-                       IsPassword="True" 
-                       Placeholder="Password"
-                       PlaceholderColor="Gray"
-                       Text="{Binding Password}"
-                       TextColor="DarkSlateGray"
-                       TextChanged="Handle_TextChanged">
-                    </Entry>
-
-                    <Entry
-                       x:Name="ConfirmPasswordEntry"
-                       IsPassword="True" 
-                       Placeholder="Confirm password"
-                       PlaceholderColor="Gray"
-                       Text="{Binding ConfirmPassword}"
-                       TextColor="DarkSlateGray"
-                       TextChanged="Handle_TextChanged">
-                    </Entry>
-
+                    <Grid>
+                        <Entry
+                            x:Name="PasswordEntry"
+                            IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path= HidePassword}" 
+                            Placeholder="Password"
+                            PlaceholderColor="Gray"
+                            Text="{Binding Password}"
+                            TextColor="DarkSlateGray"
+                            TextChanged="Handle_TextChanged">
+                        </Entry>
+                        <ImageButton VerticalOptions="Center"
+                                 Margin="0,0,40,0"
+                                 HeightRequest="20"
+                                 HorizontalOptions="End"
+                                 Source="iconEyeHide.png"
+                                 Grid.Column="0">
+                            <ImageButton.Triggers>
+                                <EventTrigger Event="Clicked">
+                                    <local:ShowPasswordTriggerAction ShowIcon="iconEyeShow.png"
+                                                                 HideIcon="iconEyeHide.png"
+                                                                 x:Name="ShowPasswordActualTrigger"/>
+                                </EventTrigger>
+                            </ImageButton.Triggers>
+                        </ImageButton>
+                    </Grid>
+                    <Grid>
+                        <Entry
+                            x:Name="ConfirmPasswordEntry"
+                            IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger1}, Path= HidePassword}" 
+                            Placeholder="Confirm password"
+                            PlaceholderColor="Gray"
+                            Text="{Binding ConfirmPassword}"
+                            TextColor="DarkSlateGray"
+                            TextChanged="Handle_TextChanged">
+                        </Entry>
+                        <ImageButton VerticalOptions="Center"
+                                 Margin="0,0,40,0"
+                                 HeightRequest="20"
+                                 HorizontalOptions="End"
+                                 Source="iconEyeHide.png"
+                                 Grid.Column="0">
+                            <ImageButton.Triggers>
+                                <EventTrigger Event="Clicked">
+                                    <local:ShowPasswordTriggerAction ShowIcon="iconEyeShow.png"
+                                                                 HideIcon="iconEyeHide.png"
+                                                                 x:Name="ShowPasswordActualTrigger1"/>
+                                </EventTrigger>
+                            </ImageButton.Triggers>
+                        </ImageButton>
+                    </Grid>
+                    
                     <Button Clicked="OnRegistrationClicked" Text="Submit" 
                             TextColor="WhiteSmoke"/>
                     
