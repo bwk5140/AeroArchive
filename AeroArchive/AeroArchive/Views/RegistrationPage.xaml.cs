@@ -134,19 +134,21 @@ namespace AeroArchive.Views
                     {
                         VisualStateManager.GoToState(EmailEntry, "Valid");
                     }
-                    if (PasswordEntry.Text != ConfirmPasswordEntry.Text)
-                    {
-                        VisualStateManager.GoToState(PasswordEntry, "Invalid");
-                        VisualStateManager.GoToState(ConfirmPasswordEntry, "Invalid");
-                        isValid = false;
-                    }
-                    else
-                    {
-                        VisualStateManager.GoToState(PasswordEntry, "Valid");
-                        VisualStateManager.GoToState(ConfirmPasswordEntry, "Valid");
-                    }
                 }
             }
+
+            if (!((PasswordEntry.Text).Equals(ConfirmPasswordEntry.Text)))
+            {
+                VisualStateManager.GoToState(PasswordEntry, "Invalid");
+                VisualStateManager.GoToState(ConfirmPasswordEntry, "Invalid");
+                isValid = false;
+            }
+            else
+            {
+                VisualStateManager.GoToState(PasswordEntry, "Valid");
+                VisualStateManager.GoToState(ConfirmPasswordEntry, "Valid");
+            }
+
             if (isValid)
             {
                 try
