@@ -4,5 +4,5 @@ locally.
 
 ## Getting Started
 Register with a local account and log in to the DMS. 
-Main storage features are geared towards storage of company employee and product information. 
-Additional information storage can be easily integrated.
+Main storage features are geared towards company employee and product information. 
+Additional information storage can be integrated.
